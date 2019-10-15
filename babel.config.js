@@ -13,6 +13,7 @@ module.exports = function(api) {
         useBuiltIns: 'usage',
       },
     ],
+    '@babel/preset-flow',
     '@babel/preset-react',
   ];
   const plugins = [
