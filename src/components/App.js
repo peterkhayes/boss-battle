@@ -9,7 +9,7 @@ import ChooseBossPage from './ChooseBossPage';
 import FightPage from './FightPage';
 import ErrorPage from './ErrorPage';
 
-function AppContents() {
+function App() {
   const state = useSelector((state) => state);
 
   switch (state.stage) {
@@ -28,25 +28,6 @@ function AppContents() {
       return <ErrorPage />;
     }
   }
-}
-
-function App() {
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <AppContents />
-    </div>
-  );
 }
 
 export default hot(App);

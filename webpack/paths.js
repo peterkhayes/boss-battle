@@ -7,6 +7,7 @@ module.exports = {
   templatePath: path.resolve(__dirname, '../', 'src/template.html'),
   imagesFolder: 'images',
   fontsFolder: 'fonts',
+  soundsFolder: 'sounds',
   cssFolder: 'css',
   jsFolder: 'js',
 };

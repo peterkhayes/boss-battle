@@ -37,6 +37,17 @@ module.exports = {
         ],
       },
       {
+        test: /\.(wav|mp3|ogg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: commonPaths.soundsFolder,
+            },
+          },
+        ],
+      },
+      {
         test: /\.(woff2|ttf|woff|eot)$/,
         use: [
           {
@@ -50,7 +61,7 @@ module.exports = {
     ],
   },
   serve: {
-    add: app => {
+    add: (app) => {
       app.use(convert(history()));
     },
     content: commonPaths.entryPath,

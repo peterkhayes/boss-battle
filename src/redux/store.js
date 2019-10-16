@@ -3,6 +3,7 @@ import {
   applyMiddleware,
   createStore as createStoreGeneric,
   type Store as StoreGeneric,
+  type Middleware as MiddlewareGeneric,
 } from 'redux';
 import {
   useSelector as useSelectorGeneric,
@@ -11,12 +12,15 @@ import {
 import logger from 'redux-logger';
 import { type ReduxAction, reducer } from './actions';
 import { type ReduxState } from './state';
+import soundsMiddleware from './sounds';
 
 export type ReduxDispatch = <T: ReduxAction>(T) => T;
 export type ReduxStore = StoreGeneric<ReduxState, ReduxAction, ReduxDispatch>;
+export type ReduxMiddleware = MiddlewareGeneric<ReduxState, ReduxAction, ReduxDispatch>;
 
 export function createStore(): ReduxStore {
-  return createStoreGeneric(reducer, applyMiddleware(logger));
+  const middleware = applyMiddleware(logger, soundsMiddleware);
+  return createStoreGeneric(reducer, middleware);
 }
 
 export function useSelector<Result>(selector: (state: ReduxState) => Result): Result {

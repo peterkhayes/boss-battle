@@ -9,10 +9,11 @@ export type Fighter = {
 
 export type Weapon = {
   name: string,
+  image?: string,
   attacks: Array<Attack>,
 };
 
 export type Attack = {
-  name: string,
-  sound?: string,
+  header: string,
+  description: string,
 };
