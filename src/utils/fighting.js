@@ -27,31 +27,40 @@ export function vibesWentUp(fighterBefore: Fighter, fighterAfter: Fighter): bool
   return fighterBefore.vibes < fighterAfter.vibes;
 }
 
-export function eitherPlayerVibesWentUp(
+export function playerVibesWentUp(
   stageBefore: FightStage,
   stageAfter: FightStage,
 ): boolean {
-  return (
-    vibesWentUp(stageBefore.player, stageAfter.player) ||
-    vibesWentUp(stageBefore.boss, stageAfter.boss)
-  );
+  return vibesWentUp(stageBefore.player, stageAfter.player);
 }
 
-export function eitherPlayerVibesWentDown(
+export function playerVibesWentDown(
   stageBefore: FightStage,
   stageAfter: FightStage,
 ): boolean {
-  return (
-    vibesWentDown(stageBefore.player, stageAfter.player) ||
-    vibesWentDown(stageBefore.boss, stageAfter.boss)
-  );
+  return vibesWentDown(stageBefore.player, stageAfter.player);
 }
 
-export function gameEndedSad(stageBefore: FightStage, stageAfter: FightStage): boolean {
-  return (
-    vibesBecameZero(stageBefore.player, stageAfter.player) ||
-    vibesBecameZero(stageBefore.boss, stageAfter.boss)
-  );
+export function bossVibesWentUp(
+  stageBefore: FightStage,
+  stageAfter: FightStage,
+): boolean {
+  return vibesWentUp(stageBefore.boss, stageAfter.boss);
+}
+
+export function bossVibesWentDown(
+  stageBefore: FightStage,
+  stageAfter: FightStage,
+): boolean {
+  return vibesWentDown(stageBefore.boss, stageAfter.boss);
+}
+
+export function playerDefeated(stageBefore: FightStage, stageAfter: FightStage): boolean {
+  return vibesBecameZero(stageBefore.player, stageAfter.player);
+}
+
+export function bossDefeated(stageBefore: FightStage, stageAfter: FightStage): boolean {
+  return vibesBecameZero(stageBefore.boss, stageAfter.boss);
 }
 
 export function gameEndedHappy(stageBefore: FightStage, stageAfter: FightStage): boolean {

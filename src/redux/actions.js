@@ -4,6 +4,7 @@ import type { Fighter, Weapon } from '../types/Fighter';
 import { initialState } from './state';
 import { GOOD_VIBES_MAX } from '../config/vibes';
 import clamp from 'lodash/clamp';
+import { PLAYER_SOUNDS } from '../utils/sounds';
 
 /*
   Resets the game and move to the initial state
@@ -139,6 +140,7 @@ export function reducer(
         player: {
           name: state.name,
           weapon: action.payload,
+          sounds: PLAYER_SOUNDS,
           vibes: 7,
         },
       };
