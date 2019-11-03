@@ -70,6 +70,26 @@ export const ZHEN: Fighter = {
   },
 };
 
-const BOSSES = [KAREN, CHAD, CONRAD, LILY, ZHEN];
+export const KEITH: Fighter = {
+  vibes: 5,
+  name: "Keith the PM who's a DJ",
+  sounds: getFighterSounds('Keith'),
+  weapon: {
+    name: 'Turntables',
+    attacks: [],
+  },
+};
+
+export const ANDRE: Fighter = {
+  vibes: 5,
+  name: 'Andre the Aspiring Founder',
+  sounds: getFighterSounds('Andre'),
+  weapon: {
+    name: 'Ambition',
+    attacks: [],
+  },
+};
+
+const BOSSES = [KAREN, CHAD, CONRAD, LILY, ZHEN, KEITH, ANDRE];
 
 export default BOSSES;
