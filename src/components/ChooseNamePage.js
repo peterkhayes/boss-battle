@@ -2,7 +2,7 @@
 import type { ChooseNameStage } from '../types/Stage';
 import React, { useState } from 'react';
 import PageContainer from './PageContainer';
-import { Button, TextInput } from 'nes-react';
+import { TextInput } from 'nes-react';
 import * as actions from '../redux/actions';
 import { useDispatch } from '../redux/store';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -30,8 +30,6 @@ export default function ChooseNamePage(_props: ChooseNameStage) {
             if (e.key === 'Escape') resetGame();
           }}
         />
-        &nbsp;
-        <Button onClick={setName}>Set Name</Button>
       </div>
     </PageContainer>
   );
