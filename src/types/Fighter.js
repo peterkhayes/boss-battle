@@ -2,7 +2,7 @@
 
 export type Fighter = {
   name: string,
-  image?: string,
+  image: string,
   sounds: SoundConfig,
   weapon: Weapon,
   vibes: number,
@@ -18,7 +18,7 @@ export type SoundConfig = {
 
 export type Weapon = {
   name: string,
-  image?: string,
+  image: string,
   attacks: Array<Attack>,
 };
 

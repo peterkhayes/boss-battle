@@ -1,0 +1,63 @@
+.carousel {
+    align-self: center;
+    width: 100%;
+    margin: 0 -100px;
+    display: flex;
+    height: 50%;
+}
+
+.prev, .next, .current {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top: 8px solid white;
+    border-bottom: 8px solid white;
+    padding-top: 40px;
+    padding-bottom: 16px;
+}
+
+.prev, .next {
+    opacity: 0.5;
+    flex: 1 1 0;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.prev {
+    border-right: 8px solid white;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.next {
+    border-left: 8px solid white;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.prev .title, .next .title {
+    font-size: 14px;
+}
+
+.prev .image, .next .image {
+    width: 200px;
+    height: 200px;
+}
+
+.current {
+    border-left: 8px solid white;
+    border-right: 8px solid white;
+    margin-left: 64px;
+    margin-right: 64px;
+    align-items: center;
+    flex: 2 2 0;
+}
+
+.current .title {
+    font-size: 24px;
+}
+
+.current .image {
+    width: 250px;
+    height: 250px;
+}

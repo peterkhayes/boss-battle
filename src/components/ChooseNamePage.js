@@ -21,6 +21,8 @@ export default function ChooseNamePage(_props: ChooseNameStage) {
     <PageContainer>
       <div style={{ alignSelf: 'center' }}>
         <h1>Enter Your Name</h1>
+        <br />
+        <br />
         <TextInput
           autoFocus
           value={tempName}

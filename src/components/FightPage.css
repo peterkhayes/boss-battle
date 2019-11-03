@@ -8,4 +8,5 @@
 .buttons {
     display: flex;
     justify-content: space-between;
+    opacity: 0.7;
 }

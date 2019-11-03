@@ -61,13 +61,6 @@ function FighterSection({ fighter, hurtFn, boostFn }: FighterSectionProps) {
           </li>
         ))}
       </List>
-
-      <FlexSpacer />
-
-      <div className={styles.buttons}>
-        <Button onClick={() => hurtFn()}>Hurt vibes</Button>
-        <Button onClick={() => boostFn()}>Boost vibes</Button>
-      </div>
     </div>
   );
 }
