@@ -2,6 +2,7 @@
 
 export type Fighter = {
   name: string,
+  title: string,
   image: string,
   sounds: SoundConfig,
   weapon: Weapon,

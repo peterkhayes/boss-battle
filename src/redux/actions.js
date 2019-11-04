@@ -4,7 +4,9 @@ import type { Fighter, Weapon } from '../types/Fighter';
 import { initialState } from './state';
 import { GOOD_VIBES_MAX } from '../config/vibes';
 import clamp from 'lodash/clamp';
+import sample from 'lodash/sample';
 import { PLAYER_SOUNDS } from '../utils/sounds';
+import PLAYER_IMAGES from '../config/playerImages';
 
 /*
   Resets the game and move to the initial state
@@ -139,6 +141,8 @@ export function reducer(
         stage: 'choose_boss',
         player: {
           name: state.name,
+          title: 'Take3 Cool Kid',
+          image: sample(PLAYER_IMAGES),
           weapon: action.payload,
           sounds: PLAYER_SOUNDS,
           vibes: 7,

@@ -1,12 +1,102 @@
+/* .centerSection { */
+    /* width: 80px; */
+/* } */
+
 .fighterSection {
     display: flex;
     flex-direction: column;
     flex: 1 1 0;
-    padding: 32px;
+    padding: 32px 16px;
 }
 
-.buttons {
+.vibesText {
+    margin-top: 40px;
+    font-size: 28px;
+    color: white;
+}
+
+
+.vibesRow, .fighterRow {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+};
+
+.flipped .fighterRow {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.fighterVibes {
+    flex-grow: 1;
+    position: relative;
+    transform: rotateZ(180deg);
+    top: -5px;
+}
+
+.flipped .fighterVibes {
+    transform: none;
+    top: 0;
+}
+
+.fighterInfo {
+    flex: 1 1 0;
+}
+
+.fighterName {
+    font-size: 36px;
+}
+
+.fighterTitle {
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+.fighterImage {
+    width: 120px;
+    height: 120px;
+    margin-right: 32px;
+}
+
+.flipped .fighterImage {
+    margin-left: 32px;
+    margin-right: 0;
+}
+
+.weaponHeader {
     opacity: 0.7;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.flipped .weaponHeader {
+    text-align: right;
+}
+
+.weaponInfo {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.flipped .weaponInfo {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.weaponImage {
+    width: 28px;
+    height: 28px;
+    margin-right: 16px;
+}
+
+.flipped .weaponImage {
+    margin-left: 16px;
+    margin-right: 0;
+}
+
+.fighterImage, .weaponImage {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }

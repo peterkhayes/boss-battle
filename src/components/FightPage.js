@@ -2,10 +2,12 @@
 import type { Fighter } from '../types/Fighter';
 import type { FightStage } from '../types/Stage';
 import React from 'react';
+import classNames from 'classnames';
 import PageContainer from './PageContainer';
 import FlexSpacer from './FlexSpacer';
 import styles from './FightPage.css';
 import { Button, List, Progress } from 'nes-react';
+import vibesImage from '../images/vibes.png';
 import * as actions from '../redux/actions';
 import { useDispatch } from '../redux/store';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -19,80 +21,84 @@ export default function FightPage({ player, boss }: FightStage) {
   const boostBossVibes = () => dispatch(actions.boostBossVibes());
   const resetGame = () => dispatch(actions.resetGame());
 
-  useHotkeys('q', hurtPlayerVibes);
-  useHotkeys('w', boostPlayerVibes);
+  useHotkeys('q', boostPlayerVibes);
+  useHotkeys('w', hurtPlayerVibes);
   useHotkeys('[', hurtBossVibes);
   useHotkeys(']', boostBossVibes);
   useHotkeys('esc', resetGame);
 
   return (
     <PageContainer>
-      <FighterSection
-        fighter={player}
-        boostFn={boostPlayerVibes}
-        hurtFn={hurtPlayerVibes}
-      />
-      <FighterSection fighter={boss} boostFn={boostBossVibes} hurtFn={hurtBossVibes} />
+      <FighterSection fighter={player} />
+      <CenterSection />
+      <FighterSection fighter={boss} flipped />
     </PageContainer>
   );
 }
 
 type FighterSectionProps = {
   fighter: Fighter,
-  hurtFn: () => mixed,
-  boostFn: () => mixed,
+  flipped?: boolean,
+  children: React$Node,
 };
 
-function FighterSection({ fighter, hurtFn, boostFn }: FighterSectionProps) {
+function FighterSection({ fighter, flipped }: FighterSectionProps) {
   return (
-    <div className={styles.fighterSection}>
-      <h2>👤 {fighter.name}</h2>
-      <br />
-      <VibeOMeter vibes={fighter.vibes} max={GOOD_VIBES_MAX} />
-      <br />
-      <br />
-      <br />
-      <h3 style={{ marginBottom: 16 }}>🗡️ {fighter.weapon.name}</h3>
-      <List>
-        {fighter.weapon.attacks.map(({ header, description }) => (
-          <li key={header} style={{ marginBottom: 16 }}>
-            <strong>{header}:&nbsp;</strong>
-            <span>{description}</span>
-          </li>
-        ))}
-      </List>
+    <div className={classNames(styles.fighterSection, flipped && styles.flipped)}>
+      <div className={styles.vibesRow}>
+        <div className={styles.fighterVibes}>
+          <Progress
+            value={fighter.vibes}
+            max={GOOD_VIBES_MAX}
+            {...getProgressProps(fighter.vibes)}
+          />
+        </div>
+      </div>
+      <div className={styles.fighterRow}>
+        <div
+          className={styles.fighterImage}
+          style={{ backgroundImage: `url('${fighter.image}')` }}
+        />
+        <div className={styles.fighterInfo}>
+          <div className={styles.fighterName}>{fighter.name}</div>
+          <div className={styles.fighterTitle}>{fighter.title}</div>
+        </div>
+      </div>
+
+      <div className={styles.weaponRow}>
+        <div className={styles.weaponHeader}>WEAPON</div>
+        <div className={styles.weaponInfo}>
+          <div
+            className={styles.weaponImage}
+            style={{ backgroundImage: `url('${fighter.weapon.image}')` }}
+          />
+          <div className={styles.itemDescription}>{fighter.weapon.name}</div>
+        </div>
+      </div>
+
+      {/* {fighter.weapon.attacks.map(({ header, description }) => (
+        <FighterItem
+          key={header}
+          header={header}
+          description={description}
+          flipped={flipped}
+        />
+      ))} */}
     </div>
   );
 }
 
-type VibeOMeterProps = {
-  vibes: number,
-  max: number,
-};
-
-function VibeOMeter({ vibes, max }: VibeOMeterProps) {
-  const vibeLevel = (() => {
-    if (vibes <= 0) return 'vibes killed';
-    if (vibes <= BAD_VIBES_MAX) return 'regretting this experience';
-    if (vibes <= OK_VIBES_MAX) return 'having second thoughts';
-    if (vibes < GOOD_VIBES_MAX) return "vibin'";
-    return 'out of this world';
-  })();
-
-  const colorProps = (() => {
-    if (vibes <= BAD_VIBES_MAX) return { error: true };
-    if (vibes <= OK_VIBES_MAX) return { warning: true };
-    if (vibes < GOOD_VIBES_MAX) return { success: true };
-    return { primary: true };
-    // TODO: more fun when in SuperVibes
-  })();
+function CenterSection() {
   return (
     <div>
-      <div>
-        <strong>Vibe Level:</strong> {vibeLevel}
-      </div>
-      <br />
-      <Progress value={vibes} max={max} {...colorProps} />
+      <div className={styles.vibesText}>VIBES</div>
     </div>
   );
+}
+
+function getProgressProps(vibes: number) {
+  if (vibes <= BAD_VIBES_MAX) return { error: true };
+  if (vibes <= OK_VIBES_MAX) return { warning: true };
+  if (vibes < GOOD_VIBES_MAX) return { success: true };
+  return { primary: true };
 }

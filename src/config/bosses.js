@@ -1,19 +1,28 @@
 // @flow
 import type { Fighter } from '../types/Fighter';
 import { getFighterSounds } from '../utils/sounds';
+import kamilaImage from '../images/kamila.gif';
+import emailImage from '../images/email.png';
 
-export const KAREN: Fighter = {
+export const KAMILLA: Fighter = {
   vibes: 5,
-  name: 'Karen From Marketing',
+  name: 'Kamila',
+  title: 'Marketing Director',
+  image: kamilaImage,
   sounds: getFighterSounds('Karen'),
   weapon: {
-    name: 'Asana',
+    name: 'Email',
+    image: emailImage,
     attacks: [
       { header: 'Favorite time of day', description: 'On time' },
-      { header: 'Favorite TV show', description: 'The Bachelor' },
       {
         header: 'Favorite tool',
-        description: 'Shared Google calendar for syncing ClassPass with all her friends',
+        description: 'Shared ClassPass calendar',
+      },
+      {
+        header: 'Major Pet Peeve',
+        description:
+          'When Ashley insists on visiting another winery when it’s already time for the boat cruise',
       },
     ],
   },
@@ -21,7 +30,8 @@ export const KAREN: Fighter = {
 
 export const CHAD: Fighter = {
   vibes: 6,
-  name: 'Chad From Sales',
+  name: 'Chad',
+
   sounds: getFighterSounds('Chad'),
   weapon: {
     name: 'Beer Staff',
@@ -90,6 +100,6 @@ export const ANDRE: Fighter = {
   },
 };
 
-const BOSSES = [KAREN, CHAD, CONRAD, LILY, ZHEN, KEITH, ANDRE];
+const BOSSES = [KAMILLA, CHAD, CONRAD, LILY, ZHEN, KEITH, ANDRE];
 
 export default BOSSES;

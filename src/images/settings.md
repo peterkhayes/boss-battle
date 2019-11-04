@@ -1,3 +1,4 @@
+Web palette
 Colors: 32
 Pixelate: 50 (max)
 Saturation: 25
