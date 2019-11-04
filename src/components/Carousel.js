@@ -9,7 +9,7 @@ import throttle from 'lodash/throttle';
 type Props<T> = {
   title: string,
   options: Array<T>,
-  selectOption: (T) => void,
+  selectOption: (T) => mixed,
   getOptionProps: (T) => { name: string, image: string, description?: string },
 };
 
@@ -73,7 +73,7 @@ export default function Carousel<T>({
 
           return (
             <div
-              key={option.name}
+              key={name}
               onClick={() => selectOption(option)}
               className={styles.option}
               style={style}

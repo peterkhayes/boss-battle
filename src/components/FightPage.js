@@ -37,10 +37,10 @@ export default function FightPage({ player, boss }: FightStage) {
 type FighterSectionProps = {
   fighter: Fighter,
   flipped?: boolean,
-  children: React$Node,
+  children?: React$Node,
 };
 
-function FighterSection({ fighter, flipped }: FighterSectionProps) {
+function FighterSection({ children, fighter, flipped }: FighterSectionProps) {
   return (
     <div className={classNames(styles.fighterSection, flipped && styles.flipped)}>
       <div className={styles.vibesRow}>
@@ -74,6 +74,7 @@ function FighterSection({ fighter, flipped }: FighterSectionProps) {
         </div>
       </div>
 
+      {children}
       {/* {fighter.weapon.attacks.map(({ header, description }) => (
         <FighterItem
           key={header}

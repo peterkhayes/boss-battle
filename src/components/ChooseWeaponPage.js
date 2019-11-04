@@ -10,9 +10,7 @@ import Carousel from './Carousel';
 export default function ChooseWeaponPage(_props: ChooseWeaponStage) {
   const dispatch = useDispatch();
 
-  const selectWeapon = (weapon) => {
-    dispatch(actions.selectWeapon(weapon));
-  };
+  const selectWeapon = (weapon) => dispatch(actions.selectWeapon(weapon));
   const unsetName = () => dispatch(actions.unsetName());
 
   useHotkeys('esc', unsetName);
@@ -23,7 +21,7 @@ export default function ChooseWeaponPage(_props: ChooseWeaponStage) {
       title="Choose Your Weapon"
       options={PLAYER_WEAPONS}
       selectOption={selectWeapon}
-      getOptionProps={(weapon) => weapon}
+      getOptionProps={(weapon) => ({ name: weapon.name, image: weapon.image })}
     />
   );
 }
