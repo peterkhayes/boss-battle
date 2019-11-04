@@ -4,10 +4,8 @@ import type { FightStage } from '../types/Stage';
 import React from 'react';
 import classNames from 'classnames';
 import PageContainer from './PageContainer';
-import FlexSpacer from './FlexSpacer';
 import styles from './FightPage.css';
-import { Button, List, Progress } from 'nes-react';
-import vibesImage from '../images/vibes.png';
+import { Progress } from 'nes-react';
 import * as actions from '../redux/actions';
 import { useDispatch } from '../redux/store';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -28,7 +26,7 @@ export default function FightPage({ player, boss }: FightStage) {
   useHotkeys('esc', resetGame);
 
   return (
-    <PageContainer>
+    <PageContainer orientation="horizontal">
       <FighterSection fighter={player} />
       <CenterSection />
       <FighterSection fighter={boss} flipped />
@@ -90,7 +88,7 @@ function FighterSection({ fighter, flipped }: FighterSectionProps) {
 
 function CenterSection() {
   return (
-    <div>
+    <div className={styles.centerSection}>
       <div className={styles.vibesText}>VIBES</div>
     </div>
   );

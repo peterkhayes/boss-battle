@@ -31,7 +31,7 @@ export const KAMILLA: Fighter = {
 export const CHAD: Fighter = {
   vibes: 6,
   name: 'Chad',
-
+  title: 'Sales Rep',
   sounds: getFighterSounds('Chad'),
   weapon: {
     name: 'Beer Staff',
@@ -45,7 +45,8 @@ export const CHAD: Fighter = {
 
 export const CONRAD: Fighter = {
   vibes: 7,
-  name: 'Conrad The CEO',
+  name: 'Conrad',
+  title: 'Visionary CEO',
   sounds: getFighterSounds('Conrad'),
   weapon: {
     name: 'Tesla',
@@ -62,7 +63,8 @@ export const CONRAD: Fighter = {
 
 export const LILY: Fighter = {
   vibes: 6,
-  name: 'Lily the Social Media Intern',
+  name: 'Lily',
+  title: 'Social Media Intern',
   sounds: getFighterSounds('Lily'),
   weapon: {
     name: 'YouTube Channel',
@@ -72,7 +74,8 @@ export const LILY: Fighter = {
 
 export const ZHEN: Fighter = {
   vibes: 5,
-  name: 'Zhen the Designer',
+  name: 'Zhen',
+  title: 'Designer',
   sounds: getFighterSounds('Zhen'),
   weapon: {
     name: 'Minimalism',
@@ -82,7 +85,8 @@ export const ZHEN: Fighter = {
 
 export const KEITH: Fighter = {
   vibes: 5,
-  name: "Keith the PM who's a DJ",
+  name: 'Keith',
+  title: "PM who's a DJ",
   sounds: getFighterSounds('Keith'),
   weapon: {
     name: 'Turntables',
@@ -92,7 +96,8 @@ export const KEITH: Fighter = {
 
 export const ANDRE: Fighter = {
   vibes: 5,
-  name: 'Andre the Aspiring Founder',
+  name: 'Andre',
+  title: 'Aspiring Founder',
   sounds: getFighterSounds('Andre'),
   weapon: {
     name: 'Ambition',

@@ -1,46 +1,92 @@
 // @flow
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import PageContainer from './PageContainer';
+import Title from './Title';
 import styles from './Carousel.css';
 import { useHotkeys } from 'react-hotkeys-hook';
+import throttle from 'lodash/throttle';
 
-interface Option {
-  name: string;
-  image: string;
-}
-
-type Props<T: Option> = {
+type Props<T> = {
+  title: string,
   options: Array<T>,
   selectOption: (T) => void,
+  getOptionProps: (T) => { name: string, image: string, description?: string },
 };
 
-export default function Carousel<T: Option>({ options, selectOption }: Props<T>) {
+export default function Carousel<T>({
+  title,
+  options,
+  selectOption,
+  getOptionProps,
+}: Props<T>) {
   const numOptions = options.length;
-  const [idx, setIdx] = useState(0);
-  const prevIdx = (idx + numOptions - 1) % numOptions;
-  const nextIdx = (idx + 1) % numOptions;
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [lastMove, setLastMove] = useState<'left' | 'right' | null>(null);
 
-  const previous = options[prevIdx];
-  const current = options[idx];
-  const next = options[nextIdx];
+  const updateSelectedIndex = useCallback(
+    throttle(
+      (n, direction) => {
+        setSelectedIndex((i) => (i + n + numOptions) % numOptions);
+        setLastMove(direction);
+      },
+      250,
+      { trailing: false },
+    ),
+    [numOptions],
+  );
 
-  useHotkeys('left', () => setIdx(nextIdx), [nextIdx]);
-  useHotkeys('right', () => setIdx(prevIdx), [prevIdx]);
-  useHotkeys('enter', () => selectOption(current), [selectOption]);
+  useHotkeys('left', () => updateSelectedIndex(1, 'left'), [numOptions]);
+  useHotkeys('right', () => updateSelectedIndex(-1, 'right'), [numOptions]);
+  useHotkeys('enter', () => selectOption(options[selectedIndex]), [
+    selectedIndex,
+    options,
+    selectOption,
+  ]);
 
   return (
-    <div className={styles.carousel}>
-      <div className={styles.prev}>
-        <img className={styles.image} src={previous.image} />
-        <h3 className={styles.title}>{previous.name}</h3>
+    <PageContainer>
+      <Title>{title}</Title>
+      <div className={styles.track}>
+        {options.map((option, index) => {
+          let offset = index - selectedIndex;
+          if (offset <= -2) offset += numOptions;
+          if (offset >= numOptions - 2) offset -= numOptions;
+
+          const distance = Math.abs(offset);
+          const shrink = Math.pow(0.66, distance);
+
+          // Prevent items wrapping around the carousel from flying across the screen
+          const shouldHide = (() => {
+            if (lastMove === 'left') return offset >= 2;
+            if (lastMove === 'right') return offset <= -2;
+            return false;
+          })();
+
+          const style = {
+            opacity: shrink,
+            transform: `scale(${shrink})`,
+            left: `${50 + 50 * offset}%`,
+            visibility: shouldHide ? 'hidden' : 'visible',
+          };
+
+          const { image, name, description } = getOptionProps(option);
+
+          return (
+            <div
+              key={option.name}
+              onClick={() => selectOption(option)}
+              className={styles.option}
+              style={style}
+            >
+              <img className={styles.optionImage} src={image} />
+              <div className={styles.optionName}>{name}</div>
+              {description && (
+                <div className={styles.optionDescription}>{description}</div>
+              )}
+            </div>
+          );
+        })}
       </div>
-      <div className={styles.current}>
-        <img className={styles.image} src={current.image} />
-        <h3 className={styles.title}>{current.name}</h3>
-      </div>
-      <div className={styles.next}>
-        <img className={styles.image} src={next.image} />
-        <h3 className={styles.title}>{next.name}</h3>
-      </div>
-    </div>
+    </PageContainer>
   );
 }

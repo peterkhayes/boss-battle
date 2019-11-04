@@ -2,6 +2,7 @@
 import type { ChooseNameStage } from '../types/Stage';
 import React, { useState } from 'react';
 import PageContainer from './PageContainer';
+import Title from './Title';
 import { TextInput } from 'nes-react';
 import * as actions from '../redux/actions';
 import { useDispatch } from '../redux/store';
@@ -14,15 +15,13 @@ export default function ChooseNamePage(_props: ChooseNameStage) {
   const setName = () => dispatch(actions.setName(tempName));
   const resetGame = () => dispatch(actions.resetGame());
 
-  // useHotkeys('enter', setName);
+  useHotkeys('enter', setName);
   useHotkeys('esc', resetGame);
 
   return (
     <PageContainer>
-      <div style={{ alignSelf: 'center' }}>
-        <h1>Enter Your Name</h1>
-        <br />
-        <br />
+      <Title>Enter Your Name</Title>
+      <div style={{ textAlign: 'center', fontSize: 24 }}>
         <TextInput
           autoFocus
           value={tempName}

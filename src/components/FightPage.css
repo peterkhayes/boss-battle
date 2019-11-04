@@ -1,6 +1,6 @@
-/* .centerSection { */
-    /* width: 80px; */
-/* } */
+.centerSection, .fighterSection {
+    align-self: stretch;
+}
 
 .fighterSection {
     display: flex;

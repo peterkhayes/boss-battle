@@ -21,5 +21,5 @@ export default function PageContainer({ orientation, children }: Props) {
   );
 }
 PageContainer.defaultProps = {
-  orientation: 'horizontal',
+  orientation: 'vertical',
 };

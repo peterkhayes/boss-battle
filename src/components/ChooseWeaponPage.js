@@ -1,7 +1,6 @@
 // @flow
 import type { ChooseWeaponStage } from '../types/Stage';
 import React from 'react';
-import PageContainer from './PageContainer';
 import * as actions from '../redux/actions';
 import { useDispatch } from '../redux/store';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -19,13 +18,12 @@ export default function ChooseWeaponPage(_props: ChooseWeaponStage) {
   useHotkeys('esc', unsetName);
 
   return (
-    <PageContainer orientation="vertical">
-      <h1 style={{ fontSize: 64, textAlign: 'center' }}>Choose Your Weapon</h1>
-      <br />
-      <br />
-      <br />
-      <br />
-      <Carousel options={PLAYER_WEAPONS} selectOption={selectWeapon} />
-    </PageContainer>
+    <Carousel
+      key="weapons"
+      title="Choose Your Weapon"
+      options={PLAYER_WEAPONS}
+      selectOption={selectWeapon}
+      getOptionProps={(weapon) => weapon}
+    />
   );
 }
