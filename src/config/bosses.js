@@ -64,7 +64,7 @@ export const CONRAD: Fighter = {
 export const LILY: Fighter = {
   vibes: 6,
   name: 'Lily',
-  title: 'Social Media Intern',
+  title: 'Social Media Manager',
   sounds: getFighterSounds('Lily'),
   weapon: {
     name: 'YouTube Channel',
@@ -86,7 +86,7 @@ export const ZHEN: Fighter = {
 export const KEITH: Fighter = {
   vibes: 5,
   name: 'Keith',
-  title: "PM who's a DJ",
+  title: 'PM & DJ',
   sounds: getFighterSounds('Keith'),
   weapon: {
     name: 'Turntables',
@@ -94,9 +94,9 @@ export const KEITH: Fighter = {
   },
 };
 
-export const ANDRE: Fighter = {
+export const ANDREY: Fighter = {
   vibes: 5,
-  name: 'Andre',
+  name: 'Andrey',
   title: 'Aspiring Founder',
   sounds: getFighterSounds('Andre'),
   weapon: {
@@ -105,6 +105,6 @@ export const ANDRE: Fighter = {
   },
 };
 
-const BOSSES = [KAMILLA, CHAD, CONRAD, LILY, ZHEN, KEITH, ANDRE];
+const BOSSES = [KAMILLA, CHAD, CONRAD, LILY, ZHEN, KEITH, ANDREY];
 
 export default BOSSES;

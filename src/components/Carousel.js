@@ -21,7 +21,7 @@ export default function Carousel<T>({
 }: Props<T>) {
   const numOptions = options.length;
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [lastMove, setLastMove] = useState<'left' | 'right' | null>(null);
+  const [lastMove, setLastMove] = useState<'right' | 'left' | null>(null);
 
   const updateSelectedIndex = useCallback(
     throttle(
@@ -35,8 +35,8 @@ export default function Carousel<T>({
     [numOptions],
   );
 
-  useHotkeys('left', () => updateSelectedIndex(1, 'left'), [numOptions]);
-  useHotkeys('right', () => updateSelectedIndex(-1, 'right'), [numOptions]);
+  useHotkeys('left', () => updateSelectedIndex(-1, 'left'), [numOptions]);
+  useHotkeys('right', () => updateSelectedIndex(1, 'right'), [numOptions]);
   useHotkeys('enter', () => selectOption(options[selectedIndex]), [
     selectedIndex,
     options,
@@ -57,8 +57,8 @@ export default function Carousel<T>({
 
           // Prevent items wrapping around the carousel from flying across the screen
           const shouldHide = (() => {
-            if (lastMove === 'left') return offset >= 2;
-            if (lastMove === 'right') return offset <= -2;
+            if (lastMove === 'left') return offset <= -2;
+            if (lastMove === 'right') return offset >= 2;
             return false;
           })();
 
