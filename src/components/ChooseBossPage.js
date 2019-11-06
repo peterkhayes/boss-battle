@@ -23,7 +23,7 @@ export default function ChooseBossPage(_props: ChooseBossStage) {
       selectOption={selectBoss}
       getOptionProps={(boss) => ({
         name: boss.name,
-        image: boss.image,
+        image: boss.image || boss.weapon.image,
         description: boss.title,
       })}
     />

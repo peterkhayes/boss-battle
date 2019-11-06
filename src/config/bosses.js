@@ -1,9 +1,17 @@
 // @flow
 import type { Fighter } from '../types/Fighter';
 import { getFighterSounds } from '../utils/sounds';
+
 import kamilaImage from '../images/kamila.gif';
 import chadImage from '../images/chad.gif';
+
 import emailImage from '../images/email.png';
+import beerImage from '../images/beer_stretched.png';
+import teslaImage from '../images/tesla.png';
+import turntablesImage from '../images/turntables.png';
+import youtubeImage from '../images/youtube.png';
+import minimalismImage from '../images/minimalism.png';
+import selfieStickImage from '../images/selfie_stick.png';
 
 export const KAMILLA: Fighter = {
   vibes: 5,
@@ -37,6 +45,7 @@ export const CHAD: Fighter = {
   sounds: getFighterSounds('Chad'),
   weapon: {
     name: 'Beer Staff',
+    image: beerImage,
     attacks: [
       { header: 'Favorite gesture', description: 'Smile and point' },
       { header: 'Favorite place', description: 'Box seats at Giants game' },
@@ -52,6 +61,7 @@ export const CONRAD: Fighter = {
   sounds: getFighterSounds('Conrad'),
   weapon: {
     name: 'Tesla',
+    image: teslaImage,
     attacks: [
       { header: 'Favorite meal system', description: 'Thistle' },
       { header: 'Favorite personality system', description: 'Enneagram' },
@@ -70,6 +80,7 @@ export const LILY: Fighter = {
   sounds: getFighterSounds('Lily'),
   weapon: {
     name: 'YouTube Channel',
+    image: youtubeImage,
     attacks: [],
   },
 };
@@ -81,6 +92,7 @@ export const ZHEN: Fighter = {
   sounds: getFighterSounds('Zhen'),
   weapon: {
     name: 'Minimalism',
+    image: minimalismImage,
     attacks: [],
   },
 };
@@ -92,6 +104,7 @@ export const KEITH: Fighter = {
   sounds: getFighterSounds('Keith'),
   weapon: {
     name: 'Turntables',
+    image: turntablesImage,
     attacks: [],
   },
 };
@@ -103,6 +116,7 @@ export const ANDREY: Fighter = {
   sounds: getFighterSounds('Andre'),
   weapon: {
     name: 'Ambition',
+    image: selfieStickImage,
     attacks: [],
   },
 };
