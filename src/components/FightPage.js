@@ -4,6 +4,7 @@ import type { FightStage } from '../types/Stage';
 import React from 'react';
 import classNames from 'classnames';
 import PageContainer from './PageContainer';
+import Image from './Image';
 import styles from './FightPage.css';
 import { Progress } from 'nes-react';
 import * as actions from '../redux/actions';
@@ -53,10 +54,7 @@ function FighterSection({ children, fighter, flipped }: FighterSectionProps) {
         </div>
       </div>
       <div className={styles.fighterRow}>
-        <div
-          className={styles.fighterImage}
-          style={{ backgroundImage: `url('${fighter.image}')` }}
-        />
+        <Image className={styles.fighterImage} src={fighter.image} />
         <div className={styles.fighterInfo}>
           <div className={styles.fighterName}>{fighter.name}</div>
           <div className={styles.fighterTitle}>{fighter.title}</div>
@@ -66,10 +64,7 @@ function FighterSection({ children, fighter, flipped }: FighterSectionProps) {
       <div className={styles.weaponRow}>
         <div className={styles.weaponHeader}>WEAPON</div>
         <div className={styles.weaponInfo}>
-          <div
-            className={styles.weaponImage}
-            style={{ backgroundImage: `url('${fighter.weapon.image}')` }}
-          />
+          <Image className={styles.weaponImage} src={fighter.weapon.image} />
           <div className={styles.itemDescription}>{fighter.weapon.name}</div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 import type { Fighter } from '../types/Fighter';
 import { getFighterSounds } from '../utils/sounds';
 import kamilaImage from '../images/kamila.gif';
+import chadImage from '../images/chad.gif';
 import emailImage from '../images/email.png';
 
 export const KAMILLA: Fighter = {
@@ -32,6 +33,7 @@ export const CHAD: Fighter = {
   vibes: 6,
   name: 'Chad',
   title: 'Sales Rep',
+  image: chadImage,
   sounds: getFighterSounds('Chad'),
   weapon: {
     name: 'Beer Staff',

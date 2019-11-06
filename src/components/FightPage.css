@@ -15,7 +15,6 @@
     color: white;
 }
 
-
 .vibesRow, .fighterRow {
     display: flex;
     align-items: center;
@@ -53,13 +52,13 @@
 }
 
 .fighterImage {
-    width: 120px;
+    width: 100px;
     height: 120px;
-    margin-right: 32px;
+    margin-right: 16px;
 }
 
 .flipped .fighterImage {
-    margin-left: 32px;
+    margin-left: 16px;
     margin-right: 0;
 }
 
@@ -93,10 +92,4 @@
 .flipped .weaponImage {
     margin-left: 16px;
     margin-right: 0;
-}
-
-.fighterImage, .weaponImage {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
 }

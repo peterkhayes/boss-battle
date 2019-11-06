@@ -1,6 +1,7 @@
 // @flow
 import React, { useState, useCallback } from 'react';
 import PageContainer from './PageContainer';
+import Image from './Image';
 import Title from './Title';
 import styles from './Carousel.css';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -78,7 +79,7 @@ export default function Carousel<T>({
               className={styles.option}
               style={style}
             >
-              <img className={styles.optionImage} src={image} />
+              <Image className={styles.optionImage} src={image} />
               <div className={styles.optionName}>{name}</div>
               {description && (
                 <div className={styles.optionDescription}>{description}</div>
