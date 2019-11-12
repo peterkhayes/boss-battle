@@ -7,6 +7,14 @@ export type Fighter = {
   sounds: SoundConfig,
   weapon: Weapon,
   vibes: number,
+  currentAttacks: CurrentAttacks,
+  facts: Array<Fact>,
+};
+
+export type CurrentAttacks = {
+  physical: Attack,
+  mental: Attack,
+  inclusive: Attack,
 };
 
 export type SoundConfig = {
@@ -23,7 +31,14 @@ export type Weapon = {
   attacks: Array<Attack>,
 };
 
+export type AttackType = 'physical' | 'mental' | 'inclusive';
+
 export type Attack = {
+  name: string,
+  type: AttackType,
+};
+
+export type Fact = {
   header: string,
   description: string,
 };

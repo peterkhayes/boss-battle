@@ -1,11 +1,11 @@
 // @flow
 import type { ReduxState } from './state';
-import type { Fighter, Weapon } from '../types/Fighter';
+import type { Fighter, Weapon, AttackType } from '../types/Fighter';
 import { initialState } from './state';
-import { GOOD_VIBES_MAX } from '../config/vibes';
-import clamp from 'lodash/clamp';
+
 import sample from 'lodash/sample';
 import { PLAYER_SOUNDS } from '../utils/sounds';
+import { changeVibes, getInitialAttacks, swapNextAttack } from '../utils/fighting';
 import PLAYER_IMAGES from '../config/playerImages';
 
 /*
@@ -72,7 +72,24 @@ export function selectBoss(boss: Fighter): SelectBossAction {
 }
 
 /*
-  Attacks from the player or the boss!
+  Initiate an attack from the player or the boss
+*/
+
+type PerformPlayerAttackAction = { type: 'perform_player_attack', payload: AttackType };
+export function performPlayerAttack(attackType: AttackType): PerformPlayerAttackAction {
+  return { type: 'perform_player_attack', payload: attackType };
+}
+type PerformBossAttackAction = { type: 'perform_boss_attack', payload: AttackType };
+export function performBossAttack(attackType: AttackType): PerformBossAttackAction {
+  return { type: 'perform_boss_attack', payload: attackType };
+}
+type ClearAttackAction = { type: 'clear_attack' };
+export function clearAttack(): ClearAttackAction {
+  return { type: 'clear_attack' };
+}
+
+/*
+  Change the vibes of the player or the boss as a result of an attack
 */
 
 type ChangePlayerVibesAction = { type: 'change_player_vibes', payload: number };
@@ -103,6 +120,9 @@ export type ReduxAction =
   | SelectWeaponAction
   | UnselectWeaponAction
   | SelectBossAction
+  | PerformPlayerAttackAction
+  | PerformBossAttackAction
+  | ClearAttackAction
   | ChangePlayerVibesAction
   | ChangeBossVibesAction;
 
@@ -137,15 +157,18 @@ export function reducer(
 
     case 'select_weapon': {
       if (state.stage !== 'choose_weapon') return state;
+      const weapon = action.payload;
       return {
         stage: 'choose_boss',
         player: {
           name: state.name,
           title: 'Take3 Cool Kid',
           image: sample(PLAYER_IMAGES),
-          weapon: action.payload,
+          weapon: weapon,
           sounds: PLAYER_SOUNDS,
           vibes: 7,
+          currentAttacks: getInitialAttacks(weapon),
+          facts: [],
         },
       };
     }
@@ -161,7 +184,35 @@ export function reducer(
         stage: 'fight',
         player: state.player,
         boss: action.payload,
+        attack: null,
       };
+    }
+
+    case 'perform_player_attack': {
+      if (state.stage !== 'fight') return state;
+      const attack = state.player.currentAttacks[action.payload];
+      return {
+        stage: 'fight',
+        player: swapNextAttack(state.player, attack),
+        boss: state.boss,
+        attack: attack,
+      };
+    }
+
+    case 'perform_boss_attack': {
+      if (state.stage !== 'fight') return state;
+      const attack = state.boss.currentAttacks[action.payload];
+      return {
+        stage: 'fight',
+        player: state.player,
+        boss: swapNextAttack(state.boss, attack),
+        attack: attack,
+      };
+    }
+
+    case 'clear_attack': {
+      if (state.stage !== 'fight') return state;
+      return { stage: 'fight', ...state, attack: undefined };
     }
 
     case 'change_player_vibes': {
@@ -170,6 +221,7 @@ export function reducer(
         stage: 'fight',
         player: changeVibes(state.player, action.payload),
         boss: state.boss,
+        attack: state.attack,
       };
     }
 
@@ -179,14 +231,11 @@ export function reducer(
         stage: 'fight',
         player: state.player,
         boss: changeVibes(state.boss, action.payload),
+        attack: state.attack,
       };
     }
 
     default:
       return state || initialState;
   }
-}
-
-function changeVibes(fighter: Fighter, vibes: number): Fighter {
-  return { ...fighter, vibes: clamp(fighter.vibes + vibes, 0, GOOD_VIBES_MAX) };
 }
