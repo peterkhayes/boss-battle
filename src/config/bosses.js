@@ -64,7 +64,19 @@ export const CHAD: Fighter = {
   sounds: getFighterSounds('Chad'),
   weapon: BEER_STAFF,
   currentAttacks: getInitialAttacks(BEER_STAFF),
+  facts: [
+    { header: 'Fraternity Name', description: 'Pickle' },
+    {
+      header: 'Beer Pong Winning Streak',
+      description: '37 (discounting the Incident with Ross)',
+    },
+    {
+      header: 'Number of Cold Calls Daily',
+      description: "It's not about the call, it's the call before the call",
+    },
+  ],
 };
+// {header: '', description: ''},
 
 const TESLA = {
   name: 'Tesla',
@@ -89,6 +101,11 @@ export const CONRAD: Fighter = {
   sounds: getFighterSounds('Conrad'),
   weapon: TESLA,
   currentAttacks: getInitialAttacks(TESLA),
+  facts: [
+    { header: 'Favorite First Date', description: 'Ayahuasca at Esalen' },
+    { header: 'Longevity Hack', description: 'Drinking salt juice in a cryo bath' },
+    { header: 'Crypto Position', description: 'Long on Filecoin' },
+  ],
 };
 
 const YOUTUBE_CHANNEL = {
@@ -103,6 +120,14 @@ export const LILY: Fighter = {
   sounds: getFighterSounds('Lily'),
   weapon: YOUTUBE_CHANNEL,
   currentAttacks: getInitialAttacks(YOUTUBE_CHANNEL),
+  facts: [
+    { header: 'Age', description: '28 (but self-identifies as Gen Z)' },
+    { header: 'Afternoon Fuel', description: 'The “Pink Drink” from Starbucks' },
+    {
+      header: 'Recent Obsession',
+      description: 'Organizing all of her romance novels by color',
+    },
+  ],
 };
 
 const PEN_AND_NOTEBOOK = {
@@ -117,6 +142,18 @@ export const ZHEN: Fighter = {
   sounds: getFighterSounds('Zhen'),
   weapon: PEN_AND_NOTEBOOK,
   currentAttacks: getInitialAttacks(PEN_AND_NOTEBOOK),
+  facts: [
+    { header: 'Vacation Highlight', description: 'Cycling in Copenhagen' },
+    {
+      header: 'Colors in wardrobe',
+      description: 'Black, grey, mauve, aubergine, more grey',
+    },
+    {
+      header: 'Passion Project',
+      description:
+        'Making a live edge Redwood coffee table from their Mountain View garage',
+    },
+  ],
 };
 
 const TURNTABLES = {
@@ -131,6 +168,14 @@ export const KEITH: Fighter = {
   sounds: getFighterSounds('Keith'),
   weapon: TURNTABLES,
   currentAttacks: getInitialAttacks(TURNTABLES),
+  facts: [
+    { header: 'Task Tracking Software', description: 'Logic Pro' },
+    { header: 'Favorite Floor of Berghain', description: '3rd basement' },
+    {
+      header: 'Weekend plans',
+      description: 'Closing out the night in the acid house room at DAS UNTERKREM',
+    },
+  ],
 };
 
 const AMBITION = {
@@ -145,6 +190,17 @@ export const ANDREY: Fighter = {
   sounds: getFighterSounds('Andre'),
   weapon: AMBITION,
   currentAttacks: getInitialAttacks(AMBITION),
+  facts: [
+    { header: 'Current Startup Idea', description: 'Instacart for the Housing Crisis' },
+    {
+      header: 'Proudest Accomplishment',
+      description: "Took Mark Zuckerberg's exact course schedule at Harvard",
+    },
+    {
+      header: 'Favorite Life Hack',
+      description: 'No place like an Uber Pool for giving your pitch',
+    },
+  ],
 };
 
 const BOSSES = [KAMILLA, CHAD, CONRAD, LILY, ZHEN, KEITH, ANDREY];
