@@ -76,7 +76,6 @@ export const CHAD: Fighter = {
     },
   ],
 };
-// {header: '', description: ''},
 
 const TESLA = {
   name: 'Tesla',
@@ -121,12 +120,9 @@ export const LILY: Fighter = {
   weapon: YOUTUBE_CHANNEL,
   currentAttacks: getInitialAttacks(YOUTUBE_CHANNEL),
   facts: [
-    { header: 'Age', description: '28 (but self-identifies as Gen Z)' },
+    { header: 'Age', description: '28 (but identifies as Gen Z)' },
     { header: 'Afternoon Fuel', description: 'The “Pink Drink” from Starbucks' },
-    {
-      header: 'Recent Obsession',
-      description: 'Organizing all of her romance novels by color',
-    },
+    { header: 'Definitely Not A', description: 'VSCO Girl' },
   ],
 };
 
@@ -146,7 +142,7 @@ export const ZHEN: Fighter = {
     { header: 'Vacation Highlight', description: 'Cycling in Copenhagen' },
     {
       header: 'Colors in wardrobe',
-      description: 'Black, grey, mauve, aubergine, more grey',
+      description: 'Black, mauve, aubergine accents',
     },
     {
       header: 'Passion Project',
@@ -172,7 +168,7 @@ export const KEITH: Fighter = {
     { header: 'Task Tracking Software', description: 'Logic Pro' },
     { header: 'Favorite Floor of Berghain', description: '3rd basement' },
     {
-      header: 'Weekend plans',
+      header: 'Weekend Plans',
       description: 'Closing out the night in the acid house room at DAS UNTERKREM',
     },
   ],
@@ -191,13 +187,13 @@ export const ANDREY: Fighter = {
   weapon: AMBITION,
   currentAttacks: getInitialAttacks(AMBITION),
   facts: [
-    { header: 'Current Startup Idea', description: 'Instacart for the Housing Crisis' },
+    { header: 'Startup Idea', description: 'Instacart for the Housing Crisis' },
     {
-      header: 'Proudest Accomplishment',
+      header: 'Bragging Rights',
       description: "Took Mark Zuckerberg's exact course schedule at Harvard",
     },
     {
-      header: 'Favorite Life Hack',
+      header: 'Life Hack',
       description: 'No place like an Uber Pool for giving your pitch',
     },
   ],
