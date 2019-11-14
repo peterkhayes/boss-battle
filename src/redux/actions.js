@@ -1,11 +1,11 @@
 // @flow
 import type { ReduxState } from './state';
-import type { Fighter, Weapon, AttackType } from '../types/Fighter';
+import type { Fighter, Weapon, Attack } from '../types/Fighter';
 import { initialState } from './state';
 
 import sample from 'lodash/sample';
 import { PLAYER_SOUNDS } from '../utils/sounds';
-import { changeVibes, getInitialAttacks, swapNextAttack } from '../utils/fighting';
+import { changeVibes, getRandomAttacks } from '../utils/fighting';
 import PLAYER_IMAGES from '../config/playerImages';
 
 /*
@@ -75,13 +75,13 @@ export function selectBoss(boss: Fighter): SelectBossAction {
   Initiate an attack from the player or the boss
 */
 
-type PerformPlayerAttackAction = { type: 'perform_player_attack', payload: AttackType };
-export function performPlayerAttack(attackType: AttackType): PerformPlayerAttackAction {
-  return { type: 'perform_player_attack', payload: attackType };
+type PerformPlayerAttackAction = { type: 'perform_player_attack', payload: Attack };
+export function performPlayerAttack(attack: Attack): PerformPlayerAttackAction {
+  return { type: 'perform_player_attack', payload: attack };
 }
-type PerformBossAttackAction = { type: 'perform_boss_attack', payload: AttackType };
-export function performBossAttack(attackType: AttackType): PerformBossAttackAction {
-  return { type: 'perform_boss_attack', payload: attackType };
+type PerformBossAttackAction = { type: 'perform_boss_attack', payload: Attack };
+export function performBossAttack(attack: Attack): PerformBossAttackAction {
+  return { type: 'perform_boss_attack', payload: attack };
 }
 type ClearAttackAction = { type: 'clear_attack' };
 export function clearAttack(): ClearAttackAction {
@@ -167,7 +167,7 @@ export function reducer(
           weapon: weapon,
           sounds: PLAYER_SOUNDS,
           vibes: 7,
-          currentAttacks: getInitialAttacks(weapon),
+          currentAttacks: getRandomAttacks(weapon),
           facts: [],
         },
       };
@@ -190,23 +190,27 @@ export function reducer(
 
     case 'perform_player_attack': {
       if (state.stage !== 'fight') return state;
-      const attack = state.player.currentAttacks[action.payload];
       return {
         stage: 'fight',
-        player: swapNextAttack(state.player, attack),
+        player: {
+          ...state.player,
+          currentAttacks: getRandomAttacks(state.player.weapon, [action.payload]),
+        },
         boss: state.boss,
-        attack: attack,
+        attack: action.payload,
       };
     }
 
     case 'perform_boss_attack': {
       if (state.stage !== 'fight') return state;
-      const attack = state.boss.currentAttacks[action.payload];
       return {
         stage: 'fight',
         player: state.player,
-        boss: swapNextAttack(state.boss, attack),
-        attack: attack,
+        boss: {
+          ...state.boss,
+          currentAttacks: getRandomAttacks(state.boss.weapon, [action.payload]),
+        },
+        attack: action.payload,
       };
     }
 

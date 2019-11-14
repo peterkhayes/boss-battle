@@ -11,11 +11,7 @@ export type Fighter = {
   facts: Array<Fact>,
 };
 
-export type CurrentAttacks = {
-  physical: Attack,
-  mental: Attack,
-  inclusive: Attack,
-};
+export type CurrentAttacks = [Attack, Attack, Attack];
 
 export type SoundConfig = {
   good: Array<string>,
@@ -31,7 +27,7 @@ export type Weapon = {
   attacks: Array<Attack>,
 };
 
-export type AttackType = 'physical' | 'mental' | 'inclusive';
+export type AttackType = 'exclusionary' | 'inclusive';
 
 export type Attack = {
   name: string,

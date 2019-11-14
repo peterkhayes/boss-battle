@@ -103,6 +103,20 @@
     font-size: 24px;
     padding: 32px 16px;
 }
+.exclusionary, .exclusionary * {
+    color: #f88 !important;
+    border-color: #f88 !important;
+}
+.exclusionary::after {
+    border-color: #f88 !important;
+}
+.inclusive, .inclusive * {
+    color: #88f !important;
+    border-color: #88f !important;
+}
+.inclusive::after {
+    border-color: #88f !important;
+}
 
 .modalOverlay {
     position: fixed;
@@ -110,7 +124,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.5);
 }
 
 .modal {

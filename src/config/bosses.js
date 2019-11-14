@@ -1,7 +1,7 @@
 // @flow
 import type { Fighter } from '../types/Fighter';
 import { getFighterSounds } from '../utils/sounds';
-import { getInitialAttacks } from '../utils/fighting';
+import { getRandomAttacks } from '../utils/fighting';
 
 import kamilaImage from '../images/kamila.gif';
 import chadImage from '../images/chad.gif';
@@ -18,12 +18,12 @@ const EMAIL = {
   name: 'Email',
   image: emailImage,
   attacks: [
-    { type: 'physical', name: 'Email Flurry' },
-    { type: 'physical', name: 'Asana Flood' },
-    { type: 'physical', name: 'Reply All' },
-    { type: 'mental', name: '“As per my last email”' },
-    { type: 'mental', name: 'Thanks in Advance' },
-    { type: 'mental', name: 'Manager’s Meeting' },
+    { type: 'exclusionary', name: 'Email Flurry' },
+    { type: 'exclusionary', name: 'Asana Flood' },
+    { type: 'exclusionary', name: 'Reply All' },
+    { type: 'exclusionary', name: '“As per my last email”' },
+    { type: 'exclusionary', name: 'Thanks in Advance' },
+    { type: 'exclusionary', name: 'Manager’s Meeting' },
     { type: 'inclusive', name: 'Reality TV' },
     { type: 'inclusive', name: 'Spa Day!' },
     { type: 'inclusive', name: 'ClassPass Duo' },
@@ -36,7 +36,7 @@ export const KAMILLA: Fighter = {
   image: kamilaImage,
   sounds: getFighterSounds('Karen'),
   weapon: EMAIL,
-  currentAttacks: getInitialAttacks(EMAIL),
+  currentAttacks: getRandomAttacks(EMAIL),
   facts: [
     { header: 'Favorite Time of Day', description: 'On time' },
     {
@@ -63,7 +63,7 @@ export const CHAD: Fighter = {
   image: chadImage,
   sounds: getFighterSounds('Chad'),
   weapon: BEER_STAFF,
-  currentAttacks: getInitialAttacks(BEER_STAFF),
+  currentAttacks: getRandomAttacks(BEER_STAFF),
   facts: [
     { header: 'Fraternity Name', description: 'Pickle' },
     {
@@ -81,13 +81,13 @@ const TESLA = {
   name: 'Tesla',
   image: teslaImage,
   attacks: [
-    { type: 'physical', name: 'Tesla Door Flip' },
-    { type: 'physical', name: 'Poncho Whip' },
-    { type: 'physical', name: 'Battery Drain' },
-    { type: 'physical', name: 'Charging Cable Lasso' },
-    { type: 'mental', name: 'Clear the Air' },
-    { type: 'mental', name: 'GPS Terminator' },
-    { type: 'mental', name: 'AI Risk' },
+    { type: 'exclusionary', name: 'Tesla Door Flip' },
+    { type: 'exclusionary', name: 'Poncho Whip' },
+    { type: 'exclusionary', name: 'Battery Drain' },
+    { type: 'exclusionary', name: 'Charging Cable Lasso' },
+    { type: 'exclusionary', name: 'Clear the Air' },
+    { type: 'exclusionary', name: 'GPS Terminator' },
+    { type: 'exclusionary', name: 'AI Risk' },
     { type: 'inclusive', name: 'Esalen Invite' },
     { type: 'inclusive', name: 'Roadster Ride' },
     { type: 'inclusive', name: 'Listen Up' },
@@ -99,7 +99,7 @@ export const CONRAD: Fighter = {
   title: 'Visionary CEO',
   sounds: getFighterSounds('Conrad'),
   weapon: TESLA,
-  currentAttacks: getInitialAttacks(TESLA),
+  currentAttacks: getRandomAttacks(TESLA),
   facts: [
     { header: 'Favorite First Date', description: 'Ayahuasca at Esalen' },
     { header: 'Longevity Hack', description: 'Drinking salt juice in a cryo bath' },
@@ -118,7 +118,7 @@ export const LILY: Fighter = {
   title: 'Social Media Manager',
   sounds: getFighterSounds('Lily'),
   weapon: YOUTUBE_CHANNEL,
-  currentAttacks: getInitialAttacks(YOUTUBE_CHANNEL),
+  currentAttacks: getRandomAttacks(YOUTUBE_CHANNEL),
   facts: [
     { header: 'Age', description: '28 (but identifies as Gen Z)' },
     { header: 'Afternoon Fuel', description: 'The “Pink Drink” from Starbucks' },
@@ -137,7 +137,7 @@ export const ZHEN: Fighter = {
   title: 'Designer',
   sounds: getFighterSounds('Zhen'),
   weapon: PEN_AND_NOTEBOOK,
-  currentAttacks: getInitialAttacks(PEN_AND_NOTEBOOK),
+  currentAttacks: getRandomAttacks(PEN_AND_NOTEBOOK),
   facts: [
     { header: 'Vacation Highlight', description: 'Cycling in Copenhagen' },
     {
@@ -163,7 +163,7 @@ export const KEITH: Fighter = {
   title: 'PM & DJ',
   sounds: getFighterSounds('Keith'),
   weapon: TURNTABLES,
-  currentAttacks: getInitialAttacks(TURNTABLES),
+  currentAttacks: getRandomAttacks(TURNTABLES),
   facts: [
     { header: 'Task Tracking Software', description: 'Logic Pro' },
     { header: 'Favorite Floor of Berghain', description: '3rd basement' },
@@ -174,8 +174,8 @@ export const KEITH: Fighter = {
   ],
 };
 
-const AMBITION = {
-  name: 'Ambition',
+const PITCH_DECK = {
+  name: 'Pitch Deck',
   image: selfieStickImage,
   attacks: [],
 };
@@ -184,8 +184,8 @@ export const ANDREY: Fighter = {
   name: 'Andrey',
   title: 'Aspiring Founder',
   sounds: getFighterSounds('Andre'),
-  weapon: AMBITION,
-  currentAttacks: getInitialAttacks(AMBITION),
+  weapon: PITCH_DECK,
+  currentAttacks: getRandomAttacks(PITCH_DECK),
   facts: [
     { header: 'Startup Idea', description: 'Instacart for the Housing Crisis' },
     {

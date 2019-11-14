@@ -10,6 +10,7 @@ import type { FightStage } from '../types/Stage';
 import { GOOD_VIBES_MAX } from '../config/vibes';
 import clamp from 'lodash/clamp';
 import sample from 'lodash/sample';
+import shuffle from 'lodash/shuffle';
 
 export function vibesAreZero(fighter: Fighter): boolean {
   return fighter.vibes === 0;
@@ -87,27 +88,22 @@ export function changeVibes(fighter: Fighter, vibes: number): Fighter {
 export function getRandomAttack(
   weapon: Weapon,
   type: AttackType,
-  current?: Attack,
+  excluding?: Array<Attack> = [],
 ): Attack {
-  const possibleAttacks = weapon.attacks.filter((a) => a.type === type && a !== current);
+  const possibleAttacks = weapon.attacks.filter(
+    (a) => a.type === type && !excluding.includes(a),
+  );
   return sample(possibleAttacks);
 }
 
-export function swapNextAttack(fighter: Fighter, current: Attack): Fighter {
-  const { type } = current;
-  return {
-    ...fighter,
-    currentAttacks: {
-      ...fighter.currentAttacks,
-      [type]: getRandomAttack(fighter.weapon, type, current),
-    },
-  };
-}
+export function getRandomAttacks(
+  weapon: Weapon,
+  excluding?: Array<Attack> = [],
+): CurrentAttacks {
+  const first = getRandomAttack(weapon, 'exclusionary', excluding);
+  const second = getRandomAttack(weapon, 'exclusionary', [...excluding, first]);
+  const third = getRandomAttack(weapon, 'inclusive', excluding);
 
-export function getInitialAttacks(weapon: Weapon): CurrentAttacks {
-  return {
-    physical: getRandomAttack(weapon, 'physical'),
-    mental: getRandomAttack(weapon, 'mental'),
-    inclusive: getRandomAttack(weapon, 'inclusive'),
-  };
+  const attacks: CurrentAttacks = [first, second, third];
+  return (shuffle(attacks): any);
 }

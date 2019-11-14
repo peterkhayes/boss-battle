@@ -19,13 +19,19 @@ export default function FightPage({ player, boss, attack }: FightStage) {
   const resetGame = () => dispatch(actions.resetGame());
   const clearAttack = () => dispatch(actions.clearAttack());
 
-  const playerPhysicalAttack = () => dispatch(actions.performPlayerAttack('physical'));
-  const playerMentalAttack = () => dispatch(actions.performPlayerAttack('mental'));
-  const playerInclusiveAttack = () => dispatch(actions.performPlayerAttack('inclusive'));
+  const playerFirstAttack = () =>
+    dispatch(actions.performPlayerAttack(player.currentAttacks[0]));
+  const playerSecondAttack = () =>
+    dispatch(actions.performPlayerAttack(player.currentAttacks[1]));
+  const playerThirdAttack = () =>
+    dispatch(actions.performPlayerAttack(player.currentAttacks[2]));
 
-  const bossPhysicalAttack = () => dispatch(actions.performBossAttack('physical'));
-  const bossMentalAttack = () => dispatch(actions.performBossAttack('mental'));
-  const bossInclusiveAttack = () => dispatch(actions.performBossAttack('inclusive'));
+  const bossFirstAttack = () =>
+    dispatch(actions.performBossAttack(boss.currentAttacks[0]));
+  const bossSecondAttack = () =>
+    dispatch(actions.performBossAttack(boss.currentAttacks[1]));
+  const bossThirdAttack = () =>
+    dispatch(actions.performBossAttack(boss.currentAttacks[2]));
 
   const hurtPlayerVibes = () => dispatch(actions.hurtPlayerVibes());
   const boostPlayerVibes = () => dispatch(actions.boostPlayerVibes());
@@ -33,13 +39,13 @@ export default function FightPage({ player, boss, attack }: FightStage) {
   const hurtBossVibes = () => dispatch(actions.hurtBossVibes());
   const boostBossVibes = () => dispatch(actions.boostBossVibes());
 
-  useHotkeys('1', playerPhysicalAttack);
-  useHotkeys('2', playerMentalAttack);
-  useHotkeys('3', playerInclusiveAttack);
+  useHotkeys('1', playerFirstAttack, [player.currentAttacks]);
+  useHotkeys('2', playerSecondAttack, [player.currentAttacks]);
+  useHotkeys('3', playerThirdAttack, [player.currentAttacks]);
 
-  useHotkeys('0', bossPhysicalAttack);
-  useHotkeys('-', bossMentalAttack);
-  useHotkeys('=', bossInclusiveAttack);
+  useHotkeys('0', bossFirstAttack, [boss.currentAttacks]);
+  useHotkeys('-', bossSecondAttack, [boss.currentAttacks]);
+  useHotkeys('=', bossThirdAttack, [boss.currentAttacks]);
 
   useHotkeys('q', boostPlayerVibes);
   useHotkeys('w', hurtPlayerVibes);
@@ -56,17 +62,17 @@ export default function FightPage({ player, boss, attack }: FightStage) {
   return (
     <PageContainer orientation="horizontal">
       <FighterSection fighter={player}>
-        {Object.keys(player.currentAttacks).map((type, i) => (
+        {player.currentAttacks.map((attack, i) => (
           // TODO: color attacks by types
           // TODO: more fun styling for these
           <Container
-            key={type}
+            key={i}
             centered
             dark
             title={`Attack ${i + 1}`}
-            className={styles.attackItem}
+            className={classNames(styles.attackItem, styles[attack.type])}
           >
-            {player.currentAttacks[type].name}
+            {attack.name}
           </Container>
         ))}
       </FighterSection>
@@ -119,14 +125,6 @@ function FighterSection({ children, fighter, flipped }: FighterSectionProps) {
       </div>
 
       {children}
-      {/* {fighter.weapon.attacks.map(({ header, description }) => (
-        <FighterItem
-          key={header}
-          header={header}
-          description={description}
-          flipped={flipped}
-        />
-      ))} */}
     </div>
   );
 }
@@ -147,8 +145,7 @@ type AttackModalProps = {
 function AttackModal({ attack, clearAttack }: AttackModalProps) {
   return (
     <div className={styles.modalOverlay} onClick={clearAttack}>
-      <div className={styles.modal}>
-        {/* TODO: close on click? */}
+      <div className={classNames(styles.modal, styles[attack.type])}>
         {/* TODO: add "drumroll" or some other delay before attack? */}
         {/* TODO: "player performs" or "boss performs" */}
         {/* TODO: fun animation here */}
