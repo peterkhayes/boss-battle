@@ -1,5 +1,5 @@
 // @flow
-import type { Fighter, Attack } from '../types/Fighter';
+import type { Fighter, Attack, AttackType } from '../types/Fighter';
 import type { FightStage } from '../types/Stage';
 import React from 'react';
 import classNames from 'classnames';
@@ -11,6 +11,7 @@ import { Container, Progress } from 'nes-react';
 import * as actions from '../redux/actions';
 import { useDispatch } from '../redux/store';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { vibesAreZero, vibesAreMax } from '../utils/fighting';
 import { BAD_VIBES_MAX, OK_VIBES_MAX, GOOD_VIBES_MAX } from '../config/vibes';
 
 export default function FightPage({ player, boss, attack }: FightStage) {
@@ -79,6 +80,9 @@ export default function FightPage({ player, boss, attack }: FightStage) {
         ))}
       </FighterSection>
       {attack && <AttackModal attack={attack} clearAttack={clearAttack} />}
+      {vibesAreZero(boss) && <ExclusionaryVictoryModal fighter={player} />}
+      {vibesAreZero(player) && <ExclusionaryVictoryModal fighter={boss} />}
+      {vibesAreMax(player) && vibesAreMax(boss) && <InclusiveVictoryModal />}
     </PageContainer>
   );
 }
@@ -143,6 +147,29 @@ function AttackModal({ attack, clearAttack }: AttackModalProps) {
         {/* TODO: "player performs" or "boss performs" */}
         {/* TODO: fun animation here */}
         <Title>{attack.name}</Title>
+      </div>
+    </div>
+  );
+}
+
+function ExclusionaryVictoryModal({ fighter }: { fighter: Fighter }) {
+  return (
+    <div className={styles.modalOverlay}>
+      <div className={classNames(styles.modal, styles.exclusionary)}>
+        <Title>{fighter.name} Wins!</Title>
+      </div>
+    </div>
+  );
+}
+
+function InclusiveVictoryModal() {
+  return (
+    <div className={styles.modalOverlay}>
+      <div className={classNames(styles.modal, styles.inclusive)}>
+        {/* TODO: add "drumroll" or some other delay before attack? */}
+        {/* TODO: "player performs" or "boss performs" */}
+        {/* TODO: fun animation here */}
+        <Title>Both Fighters Win!</Title>
       </div>
     </div>
   );

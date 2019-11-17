@@ -35,7 +35,7 @@ const EMAIL = {
   ],
 };
 export const KAMILLA: Fighter = {
-  vibes: 5,
+  vibes: 6,
   name: 'Kamila',
   title: 'Marketing Director',
   image: kamilaImage,
@@ -112,7 +112,7 @@ const TESLA = {
   ],
 };
 export const CONRAD: Fighter = {
-  vibes: 7,
+  vibes: 6,
   name: 'Conrad',
   title: 'Visionary CEO',
   image: conradImage,
@@ -174,7 +174,7 @@ const PEN_AND_NOTEBOOK = {
   ],
 };
 export const ZHEN: Fighter = {
-  vibes: 5,
+  vibes: 6,
   name: 'Zhen',
   title: 'Designer',
   image: zhenImage,
@@ -212,7 +212,7 @@ const TURNTABLES = {
   ],
 };
 export const LUCAS: Fighter = {
-  vibes: 5,
+  vibes: 6,
   name: 'Lucas',
   title: 'PM & DJ',
   image: lucasImage,
@@ -247,7 +247,7 @@ const PITCH_DECK = {
   ],
 };
 export const ANDREY: Fighter = {
-  vibes: 5,
+  vibes: 6,
   name: 'Andrey',
   title: 'Aspiring Founder',
   sounds: getFighterSounds('Andre'),
