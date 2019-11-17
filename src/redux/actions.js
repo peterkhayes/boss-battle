@@ -207,8 +207,11 @@ export function reducer(
     case 'perform_boss_attack': {
       if (state.stage !== 'fight') return state;
       if (state.attack) return state; // must clear this attack first
+
+      // 75% of the time, do what the player did. 25% of the time do the opposite.
+      const matchType = Math.random() > 0.25;
       const attack = state.boss.currentAttacks.filter(
-        ({ type }) => type === state.lastPlayerAttackType,
+        ({ type }) => (type === state.lastPlayerAttackType) === matchType,
       )[0];
       return {
         stage: 'fight',
@@ -223,7 +226,7 @@ export function reducer(
 
     case 'clear_attack': {
       if (state.stage !== 'fight') return state;
-      return { stage: 'fight', ...state, attack: undefined };
+      return { stage: 'fight', ...state, attack: null };
     }
 
     case 'change_player_vibes': {
