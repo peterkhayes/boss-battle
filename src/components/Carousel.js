@@ -6,6 +6,7 @@ import Title from './Title';
 import styles from './Carousel.css';
 import { useHotkeys } from 'react-hotkeys-hook';
 import throttle from 'lodash/throttle';
+import { sounds, playSound } from '../utils/sounds';
 
 type Props<T> = {
   title: string,
@@ -31,6 +32,7 @@ export default function Carousel<T>({
       (n, direction) => {
         setSelectedIndex((i) => (i + n + numOptions) % numOptions);
         setLastMove(direction);
+        playSound(sounds.swoosh, 0.2);
       },
       250,
       { trailing: false },

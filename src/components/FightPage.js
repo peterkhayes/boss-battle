@@ -1,9 +1,10 @@
 // @flow
-import type { Fighter, Attack, AttackType } from '../types/Fighter';
+import type { Fighter, Attack } from '../types/Fighter';
 import type { FightStage } from '../types/Stage';
 import React from 'react';
 import classNames from 'classnames';
 import PageContainer from './PageContainer';
+import AnimatedText from './AnimatedText';
 import Image from './Image';
 import Title from './Title';
 import styles from './FightPage.css';
@@ -82,7 +83,9 @@ export default function FightPage({ player, boss, attack }: FightStage) {
       {attack && <AttackModal attack={attack} clearAttack={clearAttack} />}
       {vibesAreZero(boss) && <ExclusionaryVictoryModal fighter={player} />}
       {vibesAreZero(player) && <ExclusionaryVictoryModal fighter={boss} />}
-      {vibesAreMax(player) && vibesAreMax(boss) && <InclusiveVictoryModal />}
+      {vibesAreMax(player) && vibesAreMax(boss) && (
+        <InclusiveVictoryModal boss={boss} player={player} />
+      )}
     </PageContainer>
   );
 }
@@ -155,21 +158,28 @@ function AttackModal({ attack, clearAttack }: AttackModalProps) {
 function ExclusionaryVictoryModal({ fighter }: { fighter: Fighter }) {
   return (
     <div className={styles.modalOverlay}>
-      <div className={classNames(styles.modal, styles.exclusionary)}>
-        <Title>{fighter.name} Wins!</Title>
+      <div className={styles.modal}>
+        <Image width={200} height={200} glow src={fighter.image} />
+        <AnimatedText colors={['#f88', '#ddd']} colorTransitionTime={200}>
+          <Title>{fighter.name} Wins!</Title>
+        </AnimatedText>
       </div>
     </div>
   );
 }
 
-function InclusiveVictoryModal() {
+function InclusiveVictoryModal({ player, boss }: { player: Fighter, boss: Fighter }) {
   return (
     <div className={styles.modalOverlay}>
-      <div className={classNames(styles.modal, styles.inclusive)}>
+      <div className={styles.modal}>
         {/* TODO: add "drumroll" or some other delay before attack? */}
         {/* TODO: "player performs" or "boss performs" */}
         {/* TODO: fun animation here */}
-        <Title>Both Fighters Win!</Title>
+        <Image width={200} height={200} glow src={player.image} />
+        <AnimatedText colors={['#88f', '#ddd']} colorTransitionTime={200}>
+          <Title>Mutual Victory!</Title>
+        </AnimatedText>
+        <Image width={200} height={200} glow src={boss.image} />
       </div>
     </div>
   );

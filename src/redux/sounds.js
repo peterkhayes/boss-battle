@@ -9,28 +9,54 @@ import {
   bossDefeated,
   gameEndedHappy,
 } from '../utils/fighting.js';
-import { playSoundFromList } from '../utils/sounds';
+import { sounds, playSound, playSounds } from '../utils/sounds';
+import sample from 'lodash/sample';
 
 const soundsMiddleware: ReduxMiddleware = (store) => (next) => (action) => {
   const previousState = store.getState();
   const result = next(action);
   const currentState = store.getState();
 
+  if (
+    [
+      'start_game',
+      'set_name',
+      'select_weapon',
+      'select_boss',
+      'perform_player_attack',
+      'perform_boss_attack',
+    ].includes(action.type)
+  ) {
+    playSound(sounds.punch, 0.4);
+  }
+
   if (previousState.stage === 'fight' && currentState.stage === 'fight') {
     if (gameEndedHappy(previousState, currentState)) {
-      playSoundFromList(currentState.boss.sounds.mutual);
+      playSounds([
+        sounds.victory_horns,
+        sample(currentState.boss.sounds.mutual),
+        sounds.cheering,
+      ]);
     } else if (playerDefeated(previousState, currentState)) {
-      playSoundFromList(currentState.boss.sounds.victory);
+      playSounds([
+        sounds.victory_horns,
+        sample(currentState.boss.sounds.victory),
+        sounds.cheering,
+      ]);
     } else if (bossDefeated(previousState, currentState)) {
-      playSoundFromList(currentState.boss.sounds.defeat);
+      playSounds([
+        sounds.victory_horns,
+        sample(currentState.boss.sounds.defeat),
+        sounds.cheering,
+      ]);
     } else if (playerVibesWentUp(previousState, currentState)) {
-      playSoundFromList(currentState.player.sounds.good);
+      playSound(sample(currentState.player.sounds.good));
     } else if (playerVibesWentDown(previousState, currentState)) {
-      playSoundFromList(currentState.player.sounds.bad);
+      playSound(sample(currentState.player.sounds.bad));
     } else if (bossVibesWentUp(previousState, currentState)) {
-      playSoundFromList(currentState.boss.sounds.good);
+      playSound(sample(currentState.boss.sounds.good));
     } else if (bossVibesWentDown(previousState, currentState)) {
-      playSoundFromList(currentState.boss.sounds.bad);
+      playSound(sample(currentState.boss.sounds.bad));
     }
   }
 
