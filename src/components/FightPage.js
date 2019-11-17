@@ -26,12 +26,7 @@ export default function FightPage({ player, boss, attack }: FightStage) {
   const playerThirdAttack = () =>
     dispatch(actions.performPlayerAttack(player.currentAttacks[2]));
 
-  const bossFirstAttack = () =>
-    dispatch(actions.performBossAttack(boss.currentAttacks[0]));
-  const bossSecondAttack = () =>
-    dispatch(actions.performBossAttack(boss.currentAttacks[1]));
-  const bossThirdAttack = () =>
-    dispatch(actions.performBossAttack(boss.currentAttacks[2]));
+  const bossResponds = () => dispatch(actions.performBossAttack());
 
   const hurtPlayerVibes = () => dispatch(actions.hurtPlayerVibes());
   const boostPlayerVibes = () => dispatch(actions.boostPlayerVibes());
@@ -43,9 +38,7 @@ export default function FightPage({ player, boss, attack }: FightStage) {
   useHotkeys('2', playerSecondAttack, [player.currentAttacks]);
   useHotkeys('3', playerThirdAttack, [player.currentAttacks]);
 
-  useHotkeys('0', bossFirstAttack, [boss.currentAttacks]);
-  useHotkeys('-', bossSecondAttack, [boss.currentAttacks]);
-  useHotkeys('=', bossThirdAttack, [boss.currentAttacks]);
+  useHotkeys('=', bossResponds);
 
   useHotkeys('q', boostPlayerVibes);
   useHotkeys('w', hurtPlayerVibes);
@@ -109,7 +102,7 @@ function FighterSection({ children, fighter, flipped }: FighterSectionProps) {
         </div>
       </div>
       <div className={styles.fighterRow}>
-        <Image className={styles.fighterImage} src={fighter.image} />
+        <Image className={styles.fighterImage} src={fighter.image} glow />
         <div className={styles.fighterInfo}>
           <div className={styles.fighterName}>{fighter.name}</div>
           <div className={styles.fighterTitle}>{fighter.title}</div>
@@ -120,7 +113,7 @@ function FighterSection({ children, fighter, flipped }: FighterSectionProps) {
         <div className={styles.weaponHeader}>WEAPON</div>
         <div className={styles.weaponInfo}>
           <Image className={styles.weaponImage} src={fighter.weapon.image} />
-          <div className={styles.itemDescription}>{fighter.weapon.name}</div>
+          <div className={styles.weaponName}>{fighter.weapon.name}</div>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 // @flow
 
-import type { Fighter, Attack } from './Fighter';
+import type { Fighter, Attack, AttackType } from './Fighter';
 
 export type InitialStage = {
   stage: 'initial',
@@ -25,6 +25,7 @@ export type FightStage = {
   player: Fighter,
   boss: Fighter,
   attack: ?Attack,
+  lastPlayerAttackType: AttackType,
 };
 
 export type Stage =

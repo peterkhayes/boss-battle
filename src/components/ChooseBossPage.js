@@ -20,6 +20,7 @@ export default function ChooseBossPage(_props: ChooseBossStage) {
       key="bosses"
       title="Choose Your Opponent"
       options={BOSSES}
+      glow
       selectOption={selectBoss}
       getOptionProps={(boss) => ({
         name: boss.name,

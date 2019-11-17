@@ -79,9 +79,9 @@ type PerformPlayerAttackAction = { type: 'perform_player_attack', payload: Attac
 export function performPlayerAttack(attack: Attack): PerformPlayerAttackAction {
   return { type: 'perform_player_attack', payload: attack };
 }
-type PerformBossAttackAction = { type: 'perform_boss_attack', payload: Attack };
-export function performBossAttack(attack: Attack): PerformBossAttackAction {
-  return { type: 'perform_boss_attack', payload: attack };
+type PerformBossAttackAction = { type: 'perform_boss_attack' };
+export function performBossAttack(): PerformBossAttackAction {
+  return { type: 'perform_boss_attack' };
 }
 type ClearAttackAction = { type: 'clear_attack' };
 export function clearAttack(): ClearAttackAction {
@@ -185,11 +185,13 @@ export function reducer(
         player: state.player,
         boss: action.payload,
         attack: null,
+        lastPlayerAttackType: 'exclusionary', // means boss will attack first
       };
     }
 
     case 'perform_player_attack': {
       if (state.stage !== 'fight') return state;
+      if (state.attack) return state; // must clear this attack first
       return {
         stage: 'fight',
         player: {
@@ -198,19 +200,24 @@ export function reducer(
         },
         boss: state.boss,
         attack: action.payload,
+        lastPlayerAttackType: action.payload.type,
       };
     }
 
     case 'perform_boss_attack': {
       if (state.stage !== 'fight') return state;
+      if (state.attack) return state; // must clear this attack first
+      const attack = state.boss.currentAttacks.filter(
+        ({ type }) => type === state.lastPlayerAttackType,
+      )[0];
       return {
         stage: 'fight',
-        player: state.player,
+        ...state,
+        attack,
         boss: {
           ...state.boss,
-          currentAttacks: getRandomAttacks(state.boss.weapon, [action.payload]),
+          currentAttacks: getRandomAttacks(state.boss.weapon, [attack]),
         },
-        attack: action.payload,
       };
     }
 
@@ -223,9 +230,9 @@ export function reducer(
       if (state.stage !== 'fight') return state;
       return {
         stage: 'fight',
+        ...state,
         player: changeVibes(state.player, action.payload),
-        boss: state.boss,
-        attack: state.attack,
+        attack: null,
       };
     }
 
@@ -233,9 +240,9 @@ export function reducer(
       if (state.stage !== 'fight') return state;
       return {
         stage: 'fight',
-        player: state.player,
+        ...state,
         boss: changeVibes(state.boss, action.payload),
-        attack: state.attack,
+        attack: null,
       };
     }
 

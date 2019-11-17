@@ -11,13 +11,18 @@ export const PRIVATE_SLACK_CHANNEL: Weapon = {
   name: 'Private Slack Channel',
   image: slackImg,
   attacks: [
-    { name: 'Master Lock Combo', type: 'exclusionary' },
-    { name: 'Double Padlock', type: 'exclusionary' },
-    { name: 'Insult Sling', type: 'exclusionary' },
-    { name: '"Cool People”', type: 'inclusive' },
-    { name: '“Real Artists”', type: 'inclusive' },
-    { name: 'Carpool', type: 'inclusive' },
-    { name: 'Shout-out', type: 'inclusive' },
+    { type: 'exclusionary', name: 'Master Lock Combo' },
+    { type: 'exclusionary', name: 'Double Padlock' },
+    { type: 'exclusionary', name: 'Insult Sling' },
+    { type: 'exclusionary', name: '“Cool People”' },
+    { type: 'exclusionary', name: '“Real Artists”' },
+    { type: 'exclusionary', name: 'Talk to the Hand' },
+    { type: 'exclusionary', name: 'Stranger Danger' },
+
+    { type: 'inclusive', name: 'Carpool' },
+    { type: 'inclusive', name: 'Shout-out' },
+    { type: 'inclusive', name: 'Heart2Heart' },
+    { type: 'inclusive', name: 'Bring It In!' },
   ],
 };
 
@@ -25,13 +30,17 @@ export const INSIDE_JOKE_STICK: Weapon = {
   name: 'Inside Joke Stick',
   image: sasquatchImg,
   attacks: [
-    { name: 'Pan Smack', type: 'exclusionary' },
-    { name: 'Sasquatch Stomp', type: 'exclusionary' },
-    { name: 'Pie Face', type: 'exclusionary' },
-    { name: 'Mop Tango', type: 'inclusive' },
-    { name: 'Holy Cheese', type: 'inclusive' },
-    { name: 'Lady and the Tramp', type: 'inclusive' },
-    { name: 'Secret Handshake', type: 'inclusive' },
+    { type: 'exclusionary', name: 'Pan Smack' },
+    { type: 'exclusionary', name: 'Sasquatch Stomp' },
+    { type: 'exclusionary', name: 'Pie Face' },
+    { type: 'exclusionary', name: 'Mop Tango' },
+    { type: 'exclusionary', name: 'Holy Cheese' },
+    { type: 'exclusionary', name: 'Bear Trap' },
+
+    { type: 'inclusive', name: 'Lady and the Tramp' },
+    { type: 'inclusive', name: 'Secret Handshake' },
+    { type: 'inclusive', name: 'Pyramid Scheme' },
+    { type: 'inclusive', name: 'Bring It In!' },
   ],
 };
 
@@ -39,13 +48,17 @@ export const SIDE_SHAVE: Weapon = {
   name: 'Side Shave',
   image: sideShaveImg,
   attacks: [
-    { name: 'Body Slash', type: 'exclusionary' },
-    { name: 'Buzz Cut', type: 'exclusionary' },
-    { name: 'New Piercing', type: 'exclusionary' },
-    { name: 'Three in a Row', type: 'inclusive' },
-    { name: 'Painted Black', type: 'inclusive' },
-    { name: 'Wing Tip', type: 'inclusive' },
-    { name: 'Cool Shirt', type: 'inclusive' },
+    { type: 'exclusionary', name: 'Body Slash' },
+    { type: 'exclusionary', name: 'Buzz Cut' },
+    { type: 'exclusionary', name: 'New Piercing' },
+    { type: 'exclusionary', name: 'Third Eye Blind' },
+    { type: 'exclusionary', name: 'Painted Black' },
+    { type: 'exclusionary', name: 'Hiss' },
+
+    { type: 'inclusive', name: 'Wing Tip' },
+    { type: 'inclusive', name: 'Cool Shirt' },
+    { type: 'inclusive', name: 'Get Some Ink' },
+    { type: 'inclusive', name: 'Bring It In!' },
   ],
 };
 
@@ -53,26 +66,35 @@ export const JUDGEMENT_GAVEL: Weapon = {
   name: 'Judgement Gavel',
   image: judgementGavelImg,
   attacks: [
-    { name: 'Gavel Strike', type: 'exclusionary' },
-    { name: 'In Contempt!', type: 'exclusionary' },
-    { name: 'Whack-a-mole', type: 'exclusionary' },
-    { name: 'Pass Judgement', type: 'inclusive' },
-    { name: 'Start a Chant', type: 'inclusive' },
-    { name: 'Simmer Down', type: 'inclusive' },
-    { name: 'High Five', type: 'inclusive' },
+    { type: 'exclusionary', name: 'Gavel Strike' },
+    { type: 'exclusionary', name: 'In Contempt!' },
+    { type: 'exclusionary', name: 'Whack-a-mole' },
+    { type: 'exclusionary', name: 'Pass Judgement' },
+    { type: 'exclusionary', name: 'Start a Chant' },
+    { type: 'exclusionary', name: 'Overruled!' },
+
+    { type: 'inclusive', name: 'Habeas Corpus' },
+    { type: 'inclusive', name: 'High Five' },
+    { type: 'inclusive', name: 'New Evidence' },
+    { type: 'inclusive', name: 'Bring It In!' },
   ],
 };
 
 export const POI_BALLS: Weapon = {
-  name: 'Poi Balls',
+  name: 'Fire Poi',
   image: fireballImg,
   attacks: [
-    { name: 'Helicopter Wind', type: 'exclusionary' },
-    { name: 'Fire Shirt', type: 'exclusionary' },
-    { name: 'Side to Side', type: 'exclusionary' },
-    { name: 'Trick Out', type: 'inclusive' },
-    { name: 'Play with Fire', type: 'inclusive' },
-    { name: 'Poi Basics', type: 'inclusive' },
+    { type: 'exclusionary', name: 'Helicopter Wind' },
+    { type: 'exclusionary', name: 'Fire Shirt' },
+    { type: 'exclusionary', name: 'Side to Side' },
+    { type: 'exclusionary', name: 'Trick Out' },
+    { type: 'exclusionary', name: 'Play with Fire' },
+    { type: 'exclusionary', name: 'Ring of Fire' },
+
+    { type: 'inclusive', name: 'Poi Basics' },
+    { type: 'inclusive', name: 'Front Row Seats' },
+    { type: 'inclusive', name: 'Show Stoppers' },
+    { type: 'inclusive', name: 'Bring It In!' },
   ],
 };
 

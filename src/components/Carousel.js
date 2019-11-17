@@ -10,6 +10,7 @@ import throttle from 'lodash/throttle';
 type Props<T> = {
   title: string,
   options: Array<T>,
+  glow?: boolean,
   selectOption: (T) => mixed,
   getOptionProps: (T) => { name: string, image: string, description?: string },
 };
@@ -17,6 +18,7 @@ type Props<T> = {
 export default function Carousel<T>({
   title,
   options,
+  glow,
   selectOption,
   getOptionProps,
 }: Props<T>) {
@@ -79,7 +81,7 @@ export default function Carousel<T>({
               className={styles.option}
               style={style}
             >
-              <Image className={styles.optionImage} src={image} />
+              <Image className={styles.optionImage} src={image} glow={glow} />
               <div className={styles.optionName}>{name}</div>
               {description && (
                 <div className={styles.optionDescription}>{description}</div>

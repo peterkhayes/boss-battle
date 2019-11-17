@@ -40,6 +40,12 @@
 
 .fighterInfo {
     flex: 1 1 0;
+    margin-right: 16px;
+}
+
+.flipped .fighterInfo {
+    margin-left: 16px;
+    margin-right: 0;
 }
 
 .fighterName {
@@ -54,12 +60,6 @@
 .fighterImage {
     width: 100px;
     height: 120px;
-    margin-right: 16px;
-}
-
-.flipped .fighterImage {
-    margin-left: 16px;
-    margin-right: 0;
 }
 
 .weaponRow {
@@ -85,17 +85,21 @@
 .flipped .weaponInfo {
     flex-direction: row-reverse;
     text-align: right;
+
+}
+
+.weaponName {
+    margin-left: 16px;
+}
+
+.flipped .weaponName {
+    margin-left: 0;
+    margin-right: 16px;
 }
 
 .weaponImage {
     width: 28px;
     height: 28px;
-    margin-right: 16px;
-}
-
-.flipped .weaponImage {
-    margin-left: 16px;
-    margin-right: 0;
 }
 
 .attackItem {

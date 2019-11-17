@@ -3,8 +3,13 @@ import type { Fighter } from '../types/Fighter';
 import { getFighterSounds } from '../utils/sounds';
 import { getRandomAttacks } from '../utils/fighting';
 
-import kamilaImage from '../images/kamila.gif';
+import kamilaImage from '../images/kamila.png';
 import chadImage from '../images/chad.gif';
+import conradImage from '../images/conrad.png';
+import andreyImage from '../images/andrey.png';
+import lucasImage from '../images/lucas2.png';
+import zhenImage from '../images/zhen.png';
+import lilyImage from '../images/lily.png';
 
 import emailImage from '../images/email.png';
 import beerImage from '../images/beer_stretched.png';
@@ -54,7 +59,20 @@ export const KAMILLA: Fighter = {
 const BEER_STAFF = {
   name: 'Beer Staff',
   image: beerImage,
-  attacks: [],
+  attacks: [
+    { type: 'exclusionary', name: 'Pucky Puck' },
+    { type: 'exclusionary', name: 'LOL ur mom tho' },
+    { type: 'exclusionary', name: 'Beer Pwned Amirite' },
+    { type: 'exclusionary', name: 'Order of Brothers' },
+    { type: 'exclusionary', name: 'Flip Cup Dunce' },
+    { type: 'exclusionary', name: 'Overhead Promo' },
+
+    { type: 'inclusive', name: 'Sail Bros!' },
+    { type: 'inclusive', name: 'Mad Veggie' },
+    { type: 'inclusive', name: 'Go Deep' },
+    { type: 'inclusive', name: 'Veggie Noodle' },
+    { type: 'inclusive', name: 'Mango Kush' },
+  ],
 };
 export const CHAD: Fighter = {
   vibes: 6,
@@ -97,6 +115,7 @@ export const CONRAD: Fighter = {
   vibes: 7,
   name: 'Conrad',
   title: 'Visionary CEO',
+  image: conradImage,
   sounds: getFighterSounds('Conrad'),
   weapon: TESLA,
   currentAttacks: getRandomAttacks(TESLA),
@@ -110,11 +129,23 @@ export const CONRAD: Fighter = {
 const YOUTUBE_CHANNEL = {
   name: 'YouTube Channel',
   image: youtubeImage,
-  attacks: [],
+  attacks: [
+    { type: 'exclusionary', name: 'CANCELED' },
+    { type: 'exclusionary', name: 'No Media Policy?' },
+    { type: 'exclusionary', name: 'Viral Video' },
+    { type: 'exclusionary', name: 'Thumbs DOWN' },
+    { type: 'exclusionary', name: 'InstaDragged' },
+    { type: 'exclusionary', name: 'Who’s the Joker Now?' },
+
+    { type: 'inclusive', name: 'Music Mashup' },
+    { type: 'inclusive', name: 'Slang Gang' },
+    { type: 'inclusive', name: 'Strike One' },
+  ],
 };
 export const LILY: Fighter = {
   vibes: 6,
   name: 'Lily',
+  image: lilyImage,
   title: 'Social Media Manager',
   sounds: getFighterSounds('Lily'),
   weapon: YOUTUBE_CHANNEL,
@@ -129,12 +160,24 @@ export const LILY: Fighter = {
 const PEN_AND_NOTEBOOK = {
   name: 'Pen and Notebook',
   image: minimalismImage,
-  attacks: [],
+  attacks: [
+    { type: 'exclusionary', name: 'Impulsive Redesign' },
+    { type: 'exclusionary', name: 'Bad Branding' },
+    { type: 'exclusionary', name: 'A Bit Overdone' },
+    { type: 'exclusionary', name: 'Um, Campy' },
+    { type: 'exclusionary', name: 'Harsh Feedback' },
+    { type: 'exclusionary', name: 'Eyeroll' },
+
+    { type: 'inclusive', name: 'Blue Print' },
+    { type: 'inclusive', name: 'Konmari' },
+    { type: 'inclusive', name: 'Sketch Artist' },
+  ],
 };
 export const ZHEN: Fighter = {
   vibes: 5,
   name: 'Zhen',
   title: 'Designer',
+  image: zhenImage,
   sounds: getFighterSounds('Zhen'),
   weapon: PEN_AND_NOTEBOOK,
   currentAttacks: getRandomAttacks(PEN_AND_NOTEBOOK),
@@ -155,12 +198,24 @@ export const ZHEN: Fighter = {
 const TURNTABLES = {
   name: 'Turntables',
   image: turntablesImage,
-  attacks: [],
+  attacks: [
+    { type: 'exclusionary', name: 'Drop Denial' },
+    { type: 'exclusionary', name: 'Yeah, Everybody’s Heard of Them' },
+    { type: 'exclusionary', name: 'Baby Shark' },
+    { type: 'exclusionary', name: 'Record Ninja' },
+    { type: 'exclusionary', name: 'Turntable Flip' },
+    { type: 'exclusionary', name: 'Bouncer Smash' },
+
+    { type: 'inclusive', name: 'Re-Re-Remix' },
+    { type: 'inclusive', name: 'Free Cover' },
+    { type: 'inclusive', name: 'Song Credits' },
+  ],
 };
-export const KEITH: Fighter = {
+export const LUCAS: Fighter = {
   vibes: 5,
-  name: 'Keith',
+  name: 'Lucas',
   title: 'PM & DJ',
+  image: lucasImage,
   sounds: getFighterSounds('Keith'),
   weapon: TURNTABLES,
   currentAttacks: getRandomAttacks(TURNTABLES),
@@ -177,7 +232,19 @@ export const KEITH: Fighter = {
 const PITCH_DECK = {
   name: 'Pitch Deck',
   image: selfieStickImage,
-  attacks: [],
+  attacks: [
+    { type: 'exclusionary', name: 'Fan Club' },
+    { type: 'exclusionary', name: 'Raining Swag' },
+    { type: 'exclusionary', name: 'Pitch Deck Flash' },
+    { type: 'exclusionary', name: 'SV Connections' },
+    { type: 'exclusionary', name: 'Hacker Hostel' },
+    { type: 'exclusionary', name: 'ICO' },
+    { type: 'exclusionary', name: 'Clicker Cult' },
+
+    { type: 'inclusive', name: 'Calm Down' },
+    { type: 'inclusive', name: 'Light It Up' },
+    { type: 'inclusive', name: 'Solder Sesh' },
+  ],
 };
 export const ANDREY: Fighter = {
   vibes: 5,
@@ -186,6 +253,7 @@ export const ANDREY: Fighter = {
   sounds: getFighterSounds('Andre'),
   weapon: PITCH_DECK,
   currentAttacks: getRandomAttacks(PITCH_DECK),
+  image: andreyImage,
   facts: [
     { header: 'Startup Idea', description: 'Instacart for the Housing Crisis' },
     {
@@ -199,6 +267,6 @@ export const ANDREY: Fighter = {
   ],
 };
 
-const BOSSES = [KAMILLA, CHAD, CONRAD, LILY, ZHEN, KEITH, ANDREY];
+const BOSSES = [KAMILLA, CHAD, CONRAD, LILY, ZHEN, LUCAS, ANDREY];
 
 export default BOSSES;
