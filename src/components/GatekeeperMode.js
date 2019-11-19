@@ -21,7 +21,6 @@ class GatekeeperMode extends React.Component<GatekeeperModeStage, State> {
   }
 
   syncLocalStorageToState = () => {
-    console.log('localstorage event seen');
     this.setState({ message: window.localStorage.getItem('attackText') });
   };
 
