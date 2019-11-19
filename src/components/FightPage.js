@@ -56,7 +56,7 @@ export default function FightPage({ player, boss, attack }: FightStage) {
 
   return (
     <PageContainer orientation="horizontal">
-      <FighterSection fighter={player}>
+      <FighterSection fighter={player} imageWidth={100}>
         {player.currentAttacks.map((attack, i) => (
           // TODO: color attacks by types
           // TODO: more fun styling for these
@@ -73,7 +73,7 @@ export default function FightPage({ player, boss, attack }: FightStage) {
         ))}
       </FighterSection>
       <CenterSection />
-      <FighterSection fighter={boss} flipped>
+      <FighterSection fighter={boss} flipped imageWidth={80}>
         {boss.facts.map(({ header, description }, i) => (
           <div className={styles.fact} key={i}>
             <div className={styles.factHeader}>{header}</div>
@@ -94,10 +94,11 @@ export default function FightPage({ player, boss, attack }: FightStage) {
 type FighterSectionProps = {
   fighter: Fighter,
   flipped?: boolean,
+  imageWidth: number, // hacky but boss/player images are different sizes lol
   children?: React$Node,
 };
 
-function FighterSection({ children, fighter, flipped }: FighterSectionProps) {
+function FighterSection({ children, imageWidth, fighter, flipped }: FighterSectionProps) {
   return (
     <div className={classNames(styles.fighterSection, flipped && styles.flipped)}>
       <div className={styles.vibesRow}>
@@ -110,7 +111,7 @@ function FighterSection({ children, fighter, flipped }: FighterSectionProps) {
         </div>
       </div>
       <div className={styles.fighterRow}>
-        <Image className={styles.fighterImage} src={fighter.image} glow />
+        <Image className={styles.fighterImage} src={fighter.image} glow width={imageWidth}/>
         <div className={styles.fighterInfo}>
           <div className={styles.fighterName}>{fighter.name}</div>
           <div className={styles.fighterTitle}>{fighter.title}</div>
