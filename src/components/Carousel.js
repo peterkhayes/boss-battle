@@ -1,18 +1,22 @@
 // @flow
-import React, { useState, useCallback } from 'react';
+import type { Direction } from '../types/Direction';
+import React, { useCallback } from 'react';
 import PageContainer from './PageContainer';
 import Image from './Image';
 import Title from './Title';
 import styles from './Carousel.css';
 import { useHotkeys } from 'react-hotkeys-hook';
 import throttle from 'lodash/throttle';
-import { sounds, playSound } from '../utils/sounds';
+// import { sounds, playSound } from '../utils/sounds';
 
 type Props<T> = {
   title: string,
   options: Array<T>,
+  selectedIndex: number,
+  lastMove: ?Direction,
   glow?: boolean,
-  selectOption: (T) => mixed,
+  changeSelectedIndex: (delta: number) => mixed,
+  selectOption: () => mixed,
   getOptionProps: (T) => { name: string, image: string, description?: string },
 };
 
@@ -20,33 +24,20 @@ export default function Carousel<T>({
   title,
   options,
   glow,
+  selectedIndex,
+  lastMove,
+  changeSelectedIndex,
   selectOption,
   getOptionProps,
 }: Props<T>) {
   const numOptions = options.length;
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [lastMove, setLastMove] = useState<'right' | 'left' | null>(null);
-
   const updateSelectedIndex = useCallback(
-    throttle(
-      (n, direction) => {
-        setSelectedIndex((i) => (i + n + numOptions) % numOptions);
-        setLastMove(direction);
-        playSound(sounds.swoosh, 0.2);
-      },
-      250,
-      { trailing: false },
-    ),
-    [numOptions],
+    throttle(changeSelectedIndex, 250, { trailing: false }),
   );
 
-  useHotkeys('left', () => updateSelectedIndex(-1, 'left'), [numOptions]);
-  useHotkeys('right', () => updateSelectedIndex(1, 'right'), [numOptions]);
-  useHotkeys('enter', () => selectOption(options[selectedIndex]), [
-    selectedIndex,
-    options,
-    selectOption,
-  ]);
+  useHotkeys('left', () => updateSelectedIndex(-1), [updateSelectedIndex]);
+  useHotkeys('right', () => updateSelectedIndex(1), [updateSelectedIndex]);
+  useHotkeys('enter', () => selectOption(), [selectOption]);
 
   return (
     <PageContainer>
@@ -79,7 +70,7 @@ export default function Carousel<T>({
           return (
             <div
               key={name}
-              onClick={() => selectOption(option)}
+              onClick={distance === 0 ? selectOption : undefined}
               className={styles.option}
               style={style}
             >

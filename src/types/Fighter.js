@@ -32,6 +32,7 @@ export type AttackType = 'exclusionary' | 'inclusive';
 export type Attack = {
   name: string,
   type: AttackType,
+  description?: string,
 };
 
 export type Fact = {

@@ -1,6 +1,6 @@
 // @flow
 import type { ChooseNameStage } from '../types/Stage';
-import React, { useState } from 'react';
+import React from 'react';
 import PageContainer from './PageContainer';
 import Title from './Title';
 import { TextInput } from 'nes-react';
@@ -8,14 +8,12 @@ import * as actions from '../redux/actions';
 import { useDispatch } from '../redux/store';
 import { useHotkeys } from 'react-hotkeys-hook';
 
-export default function ChooseNamePage(_props: ChooseNameStage) {
-  const [tempName, setTempName] = useState('');
-
+export default function ChooseNamePage({ name }: ChooseNameStage) {
   const dispatch = useDispatch();
-  const setName = () => dispatch(actions.setName(tempName));
+  const confirmName = () => dispatch(actions.confirmName());
   const resetGame = () => dispatch(actions.resetGame());
 
-  useHotkeys('enter', setName);
+  useHotkeys('enter', confirmName);
   useHotkeys('esc', resetGame);
 
   return (
@@ -24,10 +22,10 @@ export default function ChooseNamePage(_props: ChooseNameStage) {
       <div style={{ textAlign: 'center', fontSize: 24 }}>
         <TextInput
           autoFocus
-          value={tempName}
-          onChange={(e) => setTempName(e.target.value)}
+          value={name}
+          onChange={(e) => dispatch(actions.setName(e.target.value))}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') setName();
+            if (e.key === 'Enter') confirmName();
             if (e.key === 'Escape') resetGame();
           }}
         />

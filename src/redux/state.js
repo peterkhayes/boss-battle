@@ -17,3 +17,7 @@ export function getSavedState(): ReduxState {
 export function saveState(state: ReduxState): void {
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
+
+export function resetState() {
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(initialState));
+}

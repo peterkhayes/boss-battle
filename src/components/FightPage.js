@@ -9,6 +9,7 @@ import Image from './Image';
 import Title from './Title';
 import styles from './FightPage.css';
 import { Container, Progress } from 'nes-react';
+import useGatekeeper from './useGatekeeper';
 import * as actions from '../redux/actions';
 import { useDispatch } from '../redux/store';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -111,7 +112,12 @@ function FighterSection({ children, imageWidth, fighter, flipped }: FighterSecti
         </div>
       </div>
       <div className={styles.fighterRow}>
-        <Image className={styles.fighterImage} src={fighter.image} glow width={imageWidth}/>
+        <Image
+          className={styles.fighterImage}
+          src={fighter.image}
+          glow
+          width={imageWidth}
+        />
         <div className={styles.fighterInfo}>
           <div className={styles.fighterName}>{fighter.name}</div>
           <div className={styles.fighterTitle}>{fighter.title}</div>
@@ -145,6 +151,7 @@ type AttackModalProps = {
 };
 
 function AttackModal({ attack, clearAttack }: AttackModalProps) {
+  const isGatekeeper = useGatekeeper();
   return (
     <div className={styles.modalOverlay} onClick={clearAttack}>
       <div className={classNames(styles.modal, styles[attack.type])}>
@@ -152,6 +159,9 @@ function AttackModal({ attack, clearAttack }: AttackModalProps) {
         {/* TODO: "player performs" or "boss performs" */}
         {/* TODO: fun animation here */}
         <Title>{attack.name}</Title>
+        {isGatekeeper && (
+          <div>{attack.description || 'Attack description goes here'}</div>
+        )}
       </div>
     </div>
   );

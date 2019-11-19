@@ -26,12 +26,21 @@ export function startGame(): StartGameAction {
 }
 
 /*
-  Sets the player's name and move to choosing a weapon
+  Sets the player's provisional name
 */
 
 type SetNameAction = { type: 'set_name', payload: string };
 export function setName(name: string): SetNameAction {
   return { type: 'set_name', payload: name };
+}
+
+/*
+  Confirms the name and moves to choosing a weapon
+*/
+
+type ConfirmNameAction = { type: 'confirm_name' };
+export function confirmName(): ConfirmNameAction {
+  return { type: 'confirm_name' };
 }
 
 /*
@@ -41,6 +50,15 @@ export function setName(name: string): SetNameAction {
 type UnsetNameAction = { type: 'unset_name' };
 export function unsetName(): UnsetNameAction {
   return { type: 'unset_name' };
+}
+
+/*
+  Changes the selected weapon index by the indicated amount
+*/
+
+type ChangeWeaponAction = { type: 'change_weapon', payload: number };
+export function changeWeapon(delta: number) {
+  return { type: 'change_weapon', payload: delta };
 }
 
 /*
@@ -59,6 +77,15 @@ export function selectWeapon(weapon: Weapon): SelectWeaponAction {
 type UnselectWeaponAction = { type: 'unselect_weapon' };
 export function unselectWeapon(): UnselectWeaponAction {
   return { type: 'unselect_weapon' };
+}
+
+/*
+  Changes the selected boss index by the indicated amount
+*/
+
+type ChangeBossAction = { type: 'change_boss', payload: number };
+export function changeBoss(delta: number) {
+  return { type: 'change_boss', payload: delta };
 }
 
 /*
@@ -123,9 +150,12 @@ export type ReduxAction =
   | ResetGameAction
   | StartGameAction
   | SetNameAction
+  | ConfirmNameAction
   | UnsetNameAction
+  | ChangeWeaponAction
   | SelectWeaponAction
   | UnselectWeaponAction
+  | ChangeBossAction
   | SelectBossAction
   | PerformPlayerAttackAction
   | PerformBossAttackAction
@@ -149,18 +179,33 @@ export function reducer(
 
     case 'start_game': {
       if (state.stage !== 'initial') return state;
-      return { stage: 'choose_name' };
+      return { stage: 'choose_name', name: '' };
     }
 
     case 'set_name': {
       if (state.stage !== 'choose_name') return state;
-      if (!action.payload) return state;
-      return { stage: 'choose_weapon', name: action.payload };
+      return { stage: 'choose_name', name: action.payload };
+    }
+
+    case 'confirm_name': {
+      if (state.stage !== 'choose_name') return state;
+      if (!state.name) return state;
+      return { stage: 'choose_weapon', name: state.name, index: 0 };
     }
 
     case 'unset_name': {
       if (state.stage !== 'choose_weapon') return state;
-      return { stage: 'choose_name' };
+      return { stage: 'choose_name', name: '' };
+    }
+
+    case 'change_weapon': {
+      if (state.stage !== 'choose_weapon') return state;
+      return {
+        stage: 'choose_weapon',
+        ...state,
+        index: state.index + action.payload,
+        lastMove: action.payload > 0 ? 'right' : 'left',
+      };
     }
 
     case 'select_weapon': {
@@ -168,6 +213,7 @@ export function reducer(
       const weapon = action.payload;
       return {
         stage: 'choose_boss',
+        index: 0,
         player: {
           name: state.name,
           title: 'Take3 Cool Kid',
@@ -183,7 +229,17 @@ export function reducer(
 
     case 'unselect_weapon': {
       if (state.stage !== 'choose_boss') return state;
-      return { stage: 'choose_weapon', name: state.player.name };
+      return { stage: 'choose_weapon', name: state.player.name, index: 0 };
+    }
+
+    case 'change_boss': {
+      if (state.stage !== 'choose_boss') return state;
+      return {
+        stage: 'choose_boss',
+        ...state,
+        index: state.index + action.payload,
+        lastMove: action.payload > 0 ? 'right' : 'left',
+      };
     }
 
     case 'select_boss': {
