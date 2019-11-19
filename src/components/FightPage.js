@@ -111,7 +111,12 @@ function FighterSection({ children, imageWidth, fighter, flipped }: FighterSecti
         </div>
       </div>
       <div className={styles.fighterRow}>
-        <Image className={styles.fighterImage} src={fighter.image} glow width={imageWidth}/>
+        <Image
+          className={styles.fighterImage}
+          src={fighter.image}
+          glow
+          width={imageWidth}
+        />
         <div className={styles.fighterInfo}>
           <div className={styles.fighterName}>{fighter.name}</div>
           <div className={styles.fighterTitle}>{fighter.title}</div>

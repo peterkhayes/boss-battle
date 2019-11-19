@@ -11,18 +11,67 @@ export const PRIVATE_SLACK_CHANNEL: Weapon = {
   name: 'Private Slack Channel',
   image: slackImg,
   attacks: [
-    { type: 'exclusionary', name: 'Master Lock Combo' },
-    { type: 'exclusionary', name: 'Double Padlock' },
-    { type: 'exclusionary', name: 'Insult Sling' },
-    { type: 'exclusionary', name: '“Cool People”' },
-    { type: 'exclusionary', name: '“Real Artists”' },
-    { type: 'exclusionary', name: 'Talk to the Hand' },
-    { type: 'exclusionary', name: 'Stranger Danger' },
+    {
+      type: 'exclusionary',
+      name: 'Master Lock Combo',
+      description:
+        '[Name] goes at [BOSS] with their infamous attack: The Master Lock Combination Spin',
+    },
+    {
+      type: 'exclusionary',
+      name: 'Double Padlock',
+      description: '[Name] gets in a 1-2 hit with The Double Padlock',
+    },
+    {
+      type: 'exclusionary',
+      name: 'Insult Sling',
+      description:
+        '[Name] slings insults at [BOSS] in 15 separate private channels; everybody is laughing',
+    },
+    {
+      type: 'exclusionary',
+      name: '“Cool People”',
+      description:
+        '[Name] creates a Slack channel called “Cool People” and leaves [BOSS] out',
+    },
+    {
+      type: 'exclusionary',
+      name: '“Real Artists”',
+      description:
+        '[Name] creates a Slack channel called “Real Artists” and leaves [BOSS] out',
+    },
+    {
+      type: 'exclusionary',
+      name: 'Talk to the Hand',
+      description:
+        '[Name] is chatting up some friends and practically shoves [BOSS] backward with the force of their cold shoulder. Sorry, [BOSS] who?',
+    },
+    {
+      type: 'exclusionary',
+      name: 'Stranger Danger',
+      description:
+        '[BOSS] says hi to [Name], and [Name] claims to have no idea who they are, despite having met [BOSS] at least four times. ',
+    },
 
-    { type: 'inclusive', name: 'Carpool' },
-    { type: 'inclusive', name: 'Shout-out' },
-    { type: 'inclusive', name: 'Heart2Heart' },
-    { type: 'inclusive', name: 'Bring It In!' },
+    {
+      type: 'inclusive',
+      name: 'Carpool',
+      description:
+        '[Name] @s [BOSS] in a carpool thread for next week’s decompression party. [BOSS] would love to go!',
+    },
+    {
+      type: 'inclusive',
+      name: 'Shout-out',
+      description:
+        'Shout-out - [Name] calls out [BOSS] in a public channel and says: loved your Room Service project this year!',
+    },
+    {
+      type: 'inclusive',
+      name: 'Heart2Heart',
+      description:
+        'Heart2Heart - [Name] and [BOSS] have a heart-to-heart and really bond over [INTEREST]! Hug it out ya’ll!',
+    },
+    { type: 'inclusive', name: 'Bring It In!', description: 'Bring it in!! Group hug!!' },
   ],
 };
 

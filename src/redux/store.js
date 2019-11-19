@@ -13,13 +13,14 @@ import logger from 'redux-logger';
 import { type ReduxAction, reducer } from './actions';
 import { type ReduxState } from './state';
 import soundsMiddleware from './sounds';
+import gatekeeperTextMiddleware from './gatekeeperText';
 
 export type ReduxDispatch = <T: ReduxAction>(T) => T;
 export type ReduxStore = StoreGeneric<ReduxState, ReduxAction, ReduxDispatch>;
 export type ReduxMiddleware = MiddlewareGeneric<ReduxState, ReduxAction, ReduxDispatch>;
 
 export function createStore(): ReduxStore {
-  const middleware = applyMiddleware(logger, soundsMiddleware);
+  const middleware = applyMiddleware(logger, soundsMiddleware, gatekeeperTextMiddleware);
   return createStoreGeneric(reducer, middleware);
 }
 

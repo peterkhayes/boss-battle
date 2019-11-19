@@ -28,9 +28,14 @@ export type FightStage = {
   lastPlayerAttackType: AttackType,
 };
 
+export type GatekeeperModeStage = {
+  stage: 'gatekeeper_mode',
+};
+
 export type Stage =
   | InitialStage
   | ChooseNameStage
   | ChooseWeaponStage
   | ChooseBossStage
-  | FightStage;
+  | FightStage
+  | GatekeeperModeStage;

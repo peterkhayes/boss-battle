@@ -107,6 +107,11 @@ export function boostBossVibes(): ChangeBossVibesAction {
   return { type: 'change_boss_vibes', payload: 1 };
 }
 
+type GatekeeperModeAction = { type: 'gatekeeper_mode' };
+export function gatekeeperMode(): GatekeeperModeAction {
+  return { type: 'gatekeeper_mode' };
+}
+
 /*
   Define the final action type as the union of all actions
 */
@@ -123,7 +128,8 @@ export type ReduxAction =
   | PerformBossAttackAction
   | ClearAttackAction
   | ChangePlayerVibesAction
-  | ChangeBossVibesAction;
+  | ChangeBossVibesAction
+  | GatekeeperModeAction;
 
 /*
   Handle actions in the reducer
@@ -246,6 +252,10 @@ export function reducer(
         boss: changeVibes(state.boss, action.payload),
         attack: null,
       };
+    }
+
+    case 'gatekeeper_mode': {
+      return { stage: 'gatekeeper_mode' };
     }
 
     default:
