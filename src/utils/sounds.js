@@ -39,5 +39,3 @@ export function getFighterSounds(fighterName: string): SoundConfig {
     mutual: soundsMatching(`${fighterName} Mutual`),
   };
 }
-
-export const PLAYER_SOUNDS = getFighterSounds('Player');

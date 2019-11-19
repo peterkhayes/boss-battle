@@ -17,16 +17,10 @@ const soundsMiddleware: ReduxMiddleware = (store) => (next) => (action) => {
   const result = next(action);
   const currentState = store.getState();
 
-  if (
-    [
-      'start_game',
-      'set_name',
-      'select_weapon',
-      'select_boss',
-      'perform_player_attack',
-      'perform_boss_attack',
-    ].includes(action.type)
-  ) {
+  if (['start_game', 'set_name', 'select_weapon', 'select_boss'].includes(action.type)) {
+    playSound(sounds.punch, 0.4);
+  }
+  if (previousState.attack == null && currentState.attack != null) {
     playSound(sounds.punch, 0.4);
   }
 

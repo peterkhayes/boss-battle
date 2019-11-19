@@ -66,6 +66,7 @@ export default function FightPage({ player, boss, attack }: FightStage) {
             dark
             title={`Attack ${i + 1}`}
             className={classNames(styles.attackItem, styles[attack.type])}
+            onClick={() => dispatch(actions.performPlayerAttack(attack))}
           >
             {attack.name}
           </Container>

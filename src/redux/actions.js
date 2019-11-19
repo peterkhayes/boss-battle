@@ -4,9 +4,8 @@ import type { Fighter, Weapon, Attack } from '../types/Fighter';
 import { initialState } from './state';
 
 import sample from 'lodash/sample';
-import { PLAYER_SOUNDS } from '../utils/sounds';
 import { changeVibes, getRandomAttacks } from '../utils/fighting';
-import PLAYER_IMAGES from '../config/playerImages';
+import { PLAYER_IMAGES, PLAYER_SOUND_BANKS } from '../config/playerDefaults';
 
 /*
   Resets the game and move to the initial state
@@ -165,7 +164,7 @@ export function reducer(
           title: 'Take3 Cool Kid',
           image: sample(PLAYER_IMAGES),
           weapon: weapon,
-          sounds: PLAYER_SOUNDS,
+          sounds: sample(PLAYER_SOUND_BANKS),
           vibes: 7,
           currentAttacks: getRandomAttacks(weapon),
           facts: [],
