@@ -1,7 +1,7 @@
 // @flow
 import type { ReduxState } from './state';
 import type { Fighter, Weapon, Attack } from '../types/Fighter';
-import { initialState } from './state';
+import { getSavedState } from './state';
 
 import sample from 'lodash/sample';
 import { changeVibes, getRandomAttacks } from '../utils/fighting';
@@ -108,6 +108,14 @@ export function boostBossVibes(): ChangeBossVibesAction {
 }
 
 /*
+  Sync the state when another client sets it
+*/
+type SyncStateAction = { type: 'sync_state', payload: ReduxState };
+export function syncState(state: ReduxState): SyncStateAction {
+  return { type: 'sync_state', payload: state };
+}
+
+/*
   Define the final action type as the union of all actions
 */
 
@@ -123,14 +131,15 @@ export type ReduxAction =
   | PerformBossAttackAction
   | ClearAttackAction
   | ChangePlayerVibesAction
-  | ChangeBossVibesAction;
+  | ChangeBossVibesAction
+  | SyncStateAction;
 
 /*
   Handle actions in the reducer
 */
 
 export function reducer(
-  state: ReduxState = initialState,
+  state: ReduxState = getSavedState(),
   action: ReduxAction,
 ): ReduxState {
   switch (action.type) {
@@ -248,7 +257,11 @@ export function reducer(
       };
     }
 
+    case 'sync_state': {
+      return action.payload;
+    }
+
     default:
-      return state || initialState;
+      return state || getSavedState();
   }
 }

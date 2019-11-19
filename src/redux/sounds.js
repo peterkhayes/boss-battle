@@ -17,6 +17,9 @@ const soundsMiddleware: ReduxMiddleware = (store) => (next) => (action) => {
   const result = next(action);
   const currentState = store.getState();
 
+  // Ignore sync actions, since the sound will play in another window.
+  if (action.type === 'sync_state') return result;
+
   if (['start_game', 'set_name', 'select_weapon', 'select_boss'].includes(action.type)) {
     playSound(sounds.punch, 0.4);
   }
@@ -54,7 +57,6 @@ const soundsMiddleware: ReduxMiddleware = (store) => (next) => (action) => {
     }
   }
 
-  // $FlowFixMe - hmmm
   return result;
 };
 
