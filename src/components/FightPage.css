@@ -146,6 +146,12 @@
     padding: 50px;
 }
 
+.attackDescription { 
+    color: white !important; /* Sorry... */
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .fact {
     margin-top: 32px;
 }

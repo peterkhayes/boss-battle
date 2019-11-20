@@ -1,6 +1,6 @@
 // @flow
 import type { ReduxState } from './state';
-import type { Fighter, Weapon, Attack } from '../types/Fighter';
+import type { Fighter, Weapon, Attack, AttackType } from '../types/Fighter';
 import { getSavedState } from './state';
 
 import sample from 'lodash/sample';
@@ -221,7 +221,7 @@ export function reducer(
           weapon: weapon,
           sounds: sample(PLAYER_SOUND_BANKS),
           vibes: 7,
-          currentAttacks: getRandomAttacks(weapon),
+          currentAttacks: getRandomAttacks({ weapon }),
           facts: [],
         },
       };
@@ -256,11 +256,16 @@ export function reducer(
     case 'perform_player_attack': {
       if (state.stage !== 'fight') return state;
       if (state.attack) return state; // must clear this attack first
+
       return {
         stage: 'fight',
         player: {
           ...state.player,
-          currentAttacks: getRandomAttacks(state.player.weapon, [action.payload]),
+          currentAttacks: getRandomAttacks({
+            weapon: state.player.weapon,
+            opponentWeapon: state.boss.weapon,
+            current: action.payload,
+          }),
         },
         boss: state.boss,
         attack: action.payload,
@@ -273,17 +278,25 @@ export function reducer(
       if (state.attack) return state; // must clear this attack first
 
       // 75% of the time, do what the player did. 25% of the time do the opposite.
-      const matchType = Math.random() > 0.25;
-      const attack = state.boss.currentAttacks.filter(
-        ({ type }) => (type === state.lastPlayerAttackType) === matchType,
-      )[0];
+      let attackType: AttackType =
+        state.lastPlayerAttackType === 'exclusionary' ? 'exclusionary' : 'inclusive';
+      if (Math.random() < 0.25) {
+        attackType = attackType === 'exclusionary' ? 'inclusive' : 'exclusionary';
+      }
+
+      const attack = state.boss.currentAttacks.find((a) => a.type === attackType);
+
       return {
         stage: 'fight',
         ...state,
         attack,
         boss: {
           ...state.boss,
-          currentAttacks: getRandomAttacks(state.boss.weapon, [attack]),
+          currentAttacks: getRandomAttacks({
+            weapon: state.boss.weapon,
+            opponentWeapon: state.player.weapon,
+            current: attack,
+          }),
         },
       };
     }

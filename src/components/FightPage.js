@@ -59,14 +59,16 @@ export default function FightPage({ player, boss, attack }: FightStage) {
     <PageContainer orientation="horizontal">
       <FighterSection fighter={player} imageWidth={100}>
         {player.currentAttacks.map((attack, i) => (
-          // TODO: color attacks by types
-          // TODO: more fun styling for these
           <Container
             key={i}
             centered
             dark
             title={`Attack ${i + 1}`}
-            className={classNames(styles.attackItem, styles[attack.type])}
+            className={classNames({
+              [styles.attackItem]: true,
+              [styles.exclusionary]: attack.type === 'exclusionary',
+              [styles.inclusive]: attack.type !== 'exclusionary',
+            })}
             onClick={() => dispatch(actions.performPlayerAttack(attack))}
           >
             {attack.name}
@@ -82,7 +84,14 @@ export default function FightPage({ player, boss, attack }: FightStage) {
           </div>
         ))}
       </FighterSection>
-      {attack && <AttackModal attack={attack} clearAttack={clearAttack} />}
+      {attack && (
+        <AttackModal
+          attack={attack}
+          player={player}
+          boss={boss}
+          clearAttack={clearAttack}
+        />
+      )}
       {vibesAreZero(boss) && <ExclusionaryVictoryModal fighter={player} />}
       {vibesAreZero(player) && <ExclusionaryVictoryModal fighter={boss} />}
       {vibesAreMax(player) && vibesAreMax(boss) && (
@@ -147,21 +156,30 @@ function CenterSection() {
 
 type AttackModalProps = {
   attack: Attack,
+  player: Fighter,
+  boss: Fighter,
   clearAttack: () => mixed,
 };
 
-function AttackModal({ attack, clearAttack }: AttackModalProps) {
+function AttackModal({ attack, player, boss, clearAttack }: AttackModalProps) {
   const isGatekeeper = useGatekeeper();
+  const description = attack.description
+    .replace(/\[BOSS\]/g, boss.name)
+    .replace(/\[PLAYER\]/g, player.name);
+
   return (
     <div className={styles.modalOverlay} onClick={clearAttack}>
-      <div className={classNames(styles.modal, styles[attack.type])}>
-        {/* TODO: add "drumroll" or some other delay before attack? */}
+      <div
+        className={classNames({
+          [styles.modal]: true,
+          [styles.exclusionary]: attack.type === 'exclusionary',
+          [styles.inclusive]: attack.type !== 'exclusionary',
+        })}
+      >
         {/* TODO: "player performs" or "boss performs" */}
         {/* TODO: fun animation here */}
         <Title>{attack.name}</Title>
-        {isGatekeeper && (
-          <div>{attack.description || 'Attack description goes here'}</div>
-        )}
+        {isGatekeeper && <div className={styles.attackDescription}>{description}</div>}
       </div>
     </div>
   );

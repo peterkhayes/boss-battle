@@ -85,25 +85,36 @@ export function changeVibes(fighter: Fighter, vibes: number): Fighter {
   return { ...fighter, vibes: clamp(fighter.vibes + vibes, 0, GOOD_VIBES_MAX) };
 }
 
-export function getRandomAttack(
-  weapon: Weapon,
-  type: AttackType,
-  excluding?: Array<Attack> = [],
-): Attack {
-  const possibleAttacks = weapon.attacks.filter(
-    (a) => a.type === type && !excluding.includes(a),
-  );
-  return sample(possibleAttacks);
+function sampleWithout<X>(items: Array<X>, exclusing: Array<X>): X {
+  return sample(items.filter((i) => !exclusing.includes(i)));
 }
 
-export function getRandomAttacks(
+export function getRandomAttacks({
+  weapon,
+  opponentWeapon,
+  current,
+}: {
   weapon: Weapon,
-  excluding?: Array<Attack> = [],
-): CurrentAttacks {
-  const first = getRandomAttack(weapon, 'exclusionary', excluding);
-  const second = getRandomAttack(weapon, 'exclusionary', [...excluding, first]);
-  const third = getRandomAttack(weapon, 'inclusive', excluding);
+  opponentWeapon?: Weapon,
+  current?: Attack,
+}): CurrentAttacks {
+  const exclusionaryAttacks = weapon.attacks.filter(
+    (a) => a.type === 'exclusionary' && a !== current,
+  );
 
-  const attacks: CurrentAttacks = [first, second, third];
+  // Pull additional attacks from the opponent weapon if needed
+  let inclusiveAttacks = weapon.attacks.filter((a) => a.type === 'inclusive');
+  if (opponentWeapon) {
+    inclusiveAttacks.push(
+      ...opponentWeapon.attacks.filter((a) => a.type === 'collaborative'),
+    );
+  }
+  inclusiveAttacks = inclusiveAttacks.filter((a) => a !== current);
+
+  const ex1 = sampleWithout(exclusionaryAttacks, [current].filter(Boolean));
+  const ex2 = sampleWithout(exclusionaryAttacks, [current, ex1].filter(Boolean));
+  const incl = sampleWithout(inclusiveAttacks, [current].filter(Boolean));
+
+  const attacks: CurrentAttacks = [ex1, ex2, incl];
   return (shuffle(attacks): any);
 }

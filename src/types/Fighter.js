@@ -27,12 +27,12 @@ export type Weapon = {
   attacks: Array<Attack>,
 };
 
-export type AttackType = 'exclusionary' | 'inclusive';
+export type AttackType = 'exclusionary' | 'inclusive' | 'collaborative';
 
 export type Attack = {
   name: string,
   type: AttackType,
-  description?: string,
+  description: string,
 };
 
 export type Fact = {
