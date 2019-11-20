@@ -10,7 +10,7 @@ for (const filename of soundsContext.keys()) {
   sounds[name] = soundsContext(filename);
 }
 
-function soundsMatching(substr) {
+export function soundsMatching(substr: string): Array<string> {
   return Object.keys(sounds)
     .filter((key) => key.includes(substr))
     .map((key) => sounds[key]);

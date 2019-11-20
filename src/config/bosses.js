@@ -2,6 +2,7 @@
 import type { Fighter } from '../types/Fighter';
 import { getFighterSounds } from '../utils/sounds';
 import { getRandomAttacks } from '../utils/fighting';
+import { GOOD_VIBES_MIN } from './vibes';
 
 import kamilaImage from '../images/kamila.png';
 import chadImage from '../images/chad.gif';
@@ -94,7 +95,7 @@ const EMAIL = {
   ],
 };
 export const KAMILLA: Fighter = {
-  vibes: 6,
+  vibes: GOOD_VIBES_MIN,
   name: 'Kamila',
   title: 'Marketing Director',
   image: kamilaImage,
@@ -195,7 +196,7 @@ const BEER_STAFF = {
   ],
 };
 export const CHAD: Fighter = {
-  vibes: 6,
+  vibes: GOOD_VIBES_MIN,
   name: 'Chad',
   title: 'Sales Rep',
   image: chadImage,
@@ -288,7 +289,7 @@ const TESLA = {
   ],
 };
 export const CONRAD: Fighter = {
-  vibes: 6,
+  vibes: GOOD_VIBES_MIN,
   name: 'Conrad',
   title: 'Visionary CEO',
   image: conradImage,
@@ -370,7 +371,7 @@ const YOUTUBE_CHANNEL = {
   ],
 };
 export const LILY: Fighter = {
-  vibes: 6,
+  vibes: GOOD_VIBES_MIN,
   name: 'Lily',
   image: lilyImage,
   title: 'Social Media Manager',
@@ -452,7 +453,7 @@ const PEN_AND_NOTEBOOK = {
   ],
 };
 export const ZHEN: Fighter = {
-  vibes: 6,
+  vibes: GOOD_VIBES_MIN,
   name: 'Zhen',
   title: 'Designer',
   image: zhenImage,
@@ -541,7 +542,7 @@ const TURNTABLES = {
   ],
 };
 export const LUCAS: Fighter = {
-  vibes: 6,
+  vibes: GOOD_VIBES_MIN,
   name: 'Lucas',
   title: 'PM & DJ',
   image: lucasImage,
@@ -632,7 +633,7 @@ const PITCH_DECK = {
   ],
 };
 export const ANDREY: Fighter = {
-  vibes: 6,
+  vibes: GOOD_VIBES_MIN,
   name: 'Andrey',
   title: 'Aspiring Founder',
   sounds: getFighterSounds('Andre'),

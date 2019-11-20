@@ -21,9 +21,19 @@ const soundsMiddleware: ReduxMiddleware = (store) => (next) => (action) => {
   // $FlowFixMe - hmmm
   if (action.type === 'sync_state') return result;
 
-  if (['start_game', 'set_name', 'select_weapon', 'select_boss'].includes(action.type)) {
+  if (
+    action.type === 'start_game' ||
+    action.type === 'confirm_name' ||
+    action.type === 'select_weapon' ||
+    action.type === 'select_boss'
+  ) {
     playSound(sounds.punch, 0.4);
   }
+
+  if (action.type === 'change_weapon' || action.type === 'change_boss') {
+    playSound(sounds.swoosh, 0.4);
+  }
+
   if (previousState.attack == null && currentState.attack != null) {
     playSound(sounds.punch, 0.4);
   }

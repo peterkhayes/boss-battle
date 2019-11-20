@@ -1,15 +1,9 @@
 // @flow
-import type {
-  Fighter,
-  Weapon,
-  Attack,
-  AttackType,
-  CurrentAttacks,
-} from '../types/Fighter';
+import type { Fighter, Weapon, Attack, CurrentAttacks } from '../types/Fighter';
 import type { FightStage } from '../types/Stage';
 import { GOOD_VIBES_MAX } from '../config/vibes';
 import clamp from 'lodash/clamp';
-import sample from 'lodash/sample';
+import { sampleWithout } from './random';
 import shuffle from 'lodash/shuffle';
 
 export function vibesAreZero(fighter: Fighter): boolean {
@@ -85,10 +79,6 @@ export function changeVibes(fighter: Fighter, vibes: number): Fighter {
   return { ...fighter, vibes: clamp(fighter.vibes + vibes, 0, GOOD_VIBES_MAX) };
 }
 
-function sampleWithout<X>(items: Array<X>, exclusing: Array<X>): X {
-  return sample(items.filter((i) => !exclusing.includes(i)));
-}
-
 export function getRandomAttacks({
   weapon,
   opponentWeapon,
@@ -111,9 +101,9 @@ export function getRandomAttacks({
   }
   inclusiveAttacks = inclusiveAttacks.filter((a) => a !== current);
 
-  const ex1 = sampleWithout(exclusionaryAttacks, [current].filter(Boolean));
-  const ex2 = sampleWithout(exclusionaryAttacks, [current, ex1].filter(Boolean));
-  const incl = sampleWithout(inclusiveAttacks, [current].filter(Boolean));
+  const ex1 = sampleWithout(exclusionaryAttacks, [current]);
+  const ex2 = sampleWithout(exclusionaryAttacks, [current, ex1]);
+  const incl = sampleWithout(inclusiveAttacks, [current]);
 
   const attacks: CurrentAttacks = [ex1, ex2, incl];
   return (shuffle(attacks): any);

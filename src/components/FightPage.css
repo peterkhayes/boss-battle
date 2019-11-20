@@ -160,9 +160,14 @@
     color: gold;
     font-size: 18px;
     margin-bottom: 8px;
-    text-transform: uppercase;;
+    text-transform: uppercase;
 }
 
 .factDescription {
     font-size: 22px;
+}
+
+.modalFighterName {
+    font-size: 28px;
+    margin-bottom: 16px;
 }

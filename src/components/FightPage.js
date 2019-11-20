@@ -167,6 +167,11 @@ function AttackModal({ attack, player, boss, clearAttack }: AttackModalProps) {
     .replace(/\[BOSS\]/g, boss.name)
     .replace(/\[PLAYER\]/g, player.name);
 
+  const fighter =
+    player.weapon.attacks.includes(attack) || attack.type === 'collaborative'
+      ? player
+      : boss;
+
   return (
     <div className={styles.modalOverlay} onClick={clearAttack}>
       <div
@@ -176,8 +181,8 @@ function AttackModal({ attack, player, boss, clearAttack }: AttackModalProps) {
           [styles.inclusive]: attack.type !== 'exclusionary',
         })}
       >
-        {/* TODO: "player performs" or "boss performs" */}
         {/* TODO: fun animation here */}
+        <div className={styles.modalFighterName}>{fighter.name} uses...</div>
         <Title>{attack.name}</Title>
         {isGatekeeper && <div className={styles.attackDescription}>{description}</div>}
       </div>

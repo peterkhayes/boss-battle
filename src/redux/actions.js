@@ -6,6 +6,7 @@ import { getSavedState } from './state';
 import sample from 'lodash/sample';
 import { changeVibes, getRandomAttacks } from '../utils/fighting';
 import { PLAYER_IMAGES, PLAYER_SOUND_BANKS } from '../config/playerDefaults';
+import { GOOD_VIBES_MIN } from '../config/vibes';
 
 /*
   Resets the game and move to the initial state
@@ -220,7 +221,7 @@ export function reducer(
           image: sample(PLAYER_IMAGES),
           weapon: weapon,
           sounds: sample(PLAYER_SOUND_BANKS),
-          vibes: 7,
+          vibes: GOOD_VIBES_MIN,
           currentAttacks: getRandomAttacks({ weapon }),
           facts: [],
         },

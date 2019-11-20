@@ -9,10 +9,12 @@ import ChooseWeaponPage from './ChooseWeaponPage';
 import ChooseBossPage from './ChooseBossPage';
 import FightPage from './FightPage';
 import ErrorPage from './ErrorPage';
+import useMusic from './useMusic';
 
 function App() {
   const state = useSelector((state) => state);
   const isGatekeeper = window.location.hash.includes('gatekeeper');
+  useMusic(state, isGatekeeper);
 
   return (
     <GatekeeperContext.Provider value={isGatekeeper}>
