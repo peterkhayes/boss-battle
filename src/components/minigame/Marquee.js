@@ -10,7 +10,7 @@ type MarqueeProps = {
 export default function Marquee({ position }: MarqueeProps) {
   return (
     <div className={classNames(styles.marquee, styles[position])}>
-      <div className={styles.marqueeText}>M I N I G A M E</div>
+      <div className={styles.marqueeText}>I N T E R M I S S I O N</div>
     </div>
   );
 }

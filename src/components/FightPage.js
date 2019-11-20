@@ -5,6 +5,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PageContainer from './PageContainer';
 import AnimatedText from './AnimatedText';
+import Modal from './Modal';
 import Image from './Image';
 import Title from './Title';
 import styles from './FightPage.css';
@@ -168,50 +169,40 @@ function AttackModal({ attack, player, boss, clearAttack }: AttackModalProps) {
     .replace(/\[PLAYER\]/g, player.name);
 
   return (
-    <div className={styles.modalOverlay} onClick={clearAttack}>
-      <div
-        className={classNames({
-          [styles.modal]: true,
-          [styles.exclusionary]: attack.type === 'exclusionary',
-          [styles.inclusive]: attack.type !== 'exclusionary',
-        })}
-      >
-        {/* TODO: "player performs" or "boss performs" */}
-        {/* TODO: fun animation here */}
-        <Title>{attack.name}</Title>
-        {isGatekeeper && <div className={styles.attackDescription}>{description}</div>}
-      </div>
-    </div>
+    <Modal
+      onOverlayClick={clearAttack}
+      classNames={classNames({
+        [styles.exclusionary]: attack.type === 'exclusionary',
+        [styles.inclusive]: attack.type !== 'exclusionary',
+      })}
+    >
+      {/* TODO: "player performs" or "boss performs" */}
+      <Title>{attack.name}</Title>
+      {isGatekeeper && <div className={styles.attackDescription}>{description}</div>}
+    </Modal>
   );
 }
 
 function ExclusionaryVictoryModal({ fighter }: { fighter: Fighter }) {
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modal}>
-        <Image width={200} height={200} glow src={fighter.image} />
-        <AnimatedText colors={['#f88', '#ddd']} colorTransitionTime={200}>
-          <Title>{fighter.name} Wins!</Title>
-        </AnimatedText>
-      </div>
-    </div>
+    <Modal>
+      <Image width={200} height={200} glow src={fighter.image} />
+      <AnimatedText colors={['#f88', '#ddd']} colorTransitionTime={200}>
+        <Title>{fighter.name} Wins!</Title>
+      </AnimatedText>
+    </Modal>
   );
 }
 
 function InclusiveVictoryModal({ player, boss }: { player: Fighter, boss: Fighter }) {
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modal}>
-        {/* TODO: add "drumroll" or some other delay before attack? */}
-        {/* TODO: "player performs" or "boss performs" */}
-        {/* TODO: fun animation here */}
-        <Image width={200} height={200} glow src={player.image} />
-        <AnimatedText colors={['#88f', '#ddd']} colorTransitionTime={200}>
-          <Title>Mutual Victory!</Title>
-        </AnimatedText>
-        <Image width={200} height={200} glow src={boss.image} />
-      </div>
-    </div>
+    <Modal>
+      <Image width={200} height={200} glow src={player.image} />
+      <AnimatedText colors={['#88f', '#ddd']} colorTransitionTime={200}>
+        <Title>Mutual Victory!</Title>
+      </AnimatedText>
+      <Image width={200} height={200} glow src={boss.image} />
+    </Modal>
   );
 }
 

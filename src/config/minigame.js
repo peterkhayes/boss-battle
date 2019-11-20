@@ -1,14 +1,16 @@
 // @flow
 import type { MinigameQuestion } from '../types/Minigame';
 
+export const MINIGAME_CODE = 'llamas';
+
 export const MINIGAME_NAMES = [
-  'padton',
-  'poontab',
-  'poot',
-  'madame clavae',
-  'snacks',
-  'frankie',
-  'gary',
+  'Padton',
+  'Poontab',
+  'Poot',
+  'Madame Clavae',
+  'Snacks',
+  'Frankie',
+  'Gary',
 ];
 
 export const MINIGAME_QUESTIONS: Array<MinigameQuestion> = [
@@ -17,8 +19,8 @@ export const MINIGAME_QUESTIONS: Array<MinigameQuestion> = [
     answers: [
       { label: 'A', answer: '??????' },
       { label: 'B', answer: 'Guava' },
-      { label: 'A', answer: "Padton's magic scepter" },
-      { label: 'A', answer: 'I love wine' },
+      { label: 'C', answer: "Padton's magic scepter" },
+      { label: 'D', answer: 'I love wine' },
     ],
   },
   {

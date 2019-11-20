@@ -3,18 +3,15 @@ import type { MinigameQuestions } from '../../types/Stage';
 import classNames from 'classnames';
 import { Container } from 'nes-react';
 import React from 'react';
-import PageContainer from '../PageContainer';
-import Marquee from './Marquee';
 import styles from './Minigame.css';
+import Modal from '../Modal';
+import Title from '../Title';
 import { MINIGAME_QUESTIONS } from '../../config/minigame';
 
-// TODO selection of answers...
-
-export default function MinigameQuestionsPage({ index }: MinigameQuestions) {
+export default function MinigameQuestionsPage({ index, answered }: MinigameQuestions) {
   const question = MINIGAME_QUESTIONS[index];
   return (
-    <PageContainer>
-      <Marquee position="top" />
+    <>
       <Question>{question.question}</Question>
       <div className={styles.answers}>
         {question.answers.map((answer, i) => (
@@ -23,8 +20,12 @@ export default function MinigameQuestionsPage({ index }: MinigameQuestions) {
           </Answer>
         ))}
       </div>
-      <Marquee position="bottom" />
-    </PageContainer>
+      {answered && (
+        <Modal>
+          <Title>Correct!!!</Title>
+        </Modal>
+      )}
+    </>
   );
 }
 

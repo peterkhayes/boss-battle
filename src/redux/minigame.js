@@ -1,17 +1,16 @@
 // @flow
 import type { ReduxMiddleware } from './store';
 import { advanceMinigame } from './actions';
+import { MINIGAME_CODE } from '../config/minigame';
 
-const CODE = 'llamas';
-
-const syncMiddleware: ReduxMiddleware = (store) => {
+const minigameMiddleware: ReduxMiddleware = (store) => {
   let codeProgress = '';
 
   window.addEventListener('keypress', (e) => {
     const updatedProgress = codeProgress + e.key;
-    if (updatedProgress === CODE) {
+    if (updatedProgress === MINIGAME_CODE) {
       store.dispatch(advanceMinigame());
-    } else if (CODE.startsWith(updatedProgress)) {
+    } else if (MINIGAME_CODE.startsWith(updatedProgress)) {
       codeProgress = updatedProgress;
     } else {
       codeProgress = '';
@@ -22,4 +21,4 @@ const syncMiddleware: ReduxMiddleware = (store) => {
   return (next) => (action) => next(action);
 };
 
-export default syncMiddleware;
+export default minigameMiddleware;

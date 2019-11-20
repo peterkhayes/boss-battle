@@ -367,6 +367,7 @@ export function reducer(
         return {
           stage: 'minigame_questions',
           index: 0,
+          answered: false,
         };
       } else if (
         state.stage === 'minigame_questions' &&
@@ -374,7 +375,8 @@ export function reducer(
       ) {
         return {
           stage: 'minigame_questions',
-          index: state.index + 1,
+          index: state.answered ? state.index + 1 : state.index,
+          answered: !state.answered,
         };
       } else {
         return { stage: 'minigame_celebration' };

@@ -46,6 +46,7 @@ export type MinigamePlayers = {
 export type MinigameQuestions = {
   stage: 'minigame_questions',
   index: number,
+  answered: boolean,
 };
 
 export type MinigameCelebration = {
