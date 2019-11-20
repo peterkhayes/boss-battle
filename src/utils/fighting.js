@@ -1,11 +1,5 @@
 // @flow
-import type {
-  Fighter,
-  Weapon,
-  Attack,
-  AttackType,
-  CurrentAttacks,
-} from '../types/Fighter';
+import type { Fighter, Weapon, Attack, CurrentAttacks } from '../types/Fighter';
 import type { FightStage } from '../types/Stage';
 import { GOOD_VIBES_MAX } from '../config/vibes';
 import clamp from 'lodash/clamp';
