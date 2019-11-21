@@ -2,7 +2,12 @@
 import type { ReduxState } from '../redux/state';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { playSound } from '../utils/sounds';
-import { INTRO_MUSIC, FIGHT_MUSIC } from '../config/music';
+import {
+  INTRO_MUSIC,
+  FIGHT_MUSIC,
+  MINIGAME_MAIN_MUSIC,
+  MINIGAME_END_MUSIC,
+} from '../config/music';
 import { sampleWithout } from '../utils/random';
 
 const EMPTY_TRACKS: Array<string> = [];
@@ -16,6 +21,12 @@ function getTracks(state: ReduxState): Array<string> {
       return INTRO_MUSIC;
     case 'fight':
       return FIGHT_MUSIC;
+    case 'minigame_intro':
+    case 'minigame_players':
+    case 'minigame_questions':
+      return MINIGAME_MAIN_MUSIC;
+    case 'minigame_celebration':
+      return MINIGAME_END_MUSIC;
     default:
       return EMPTY_TRACKS;
   }
@@ -31,7 +42,6 @@ export default function useMusic(state: ReduxState, isGatekeeper: boolean) {
     if (!track) return;
 
     trackRef.current = track;
-    console.log('playing', track);
     const audio = playSound(track, 0.5);
 
     const listener = () => playNext(tracks);
