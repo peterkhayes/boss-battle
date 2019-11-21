@@ -10,7 +10,13 @@ export const MINIGAME_NAMES = [
   'Madame Clavae',
   'Snacks',
   'Frankie',
+  'Babka',
   'Gary',
+  'Zucchini',
+  'The Grease Queen',
+  'Stevie',
+  'Steve',
+  'Babby',
 ];
 
 export const MINIGAME_QUESTIONS: Array<MinigameQuestion> = [
@@ -21,6 +27,15 @@ export const MINIGAME_QUESTIONS: Array<MinigameQuestion> = [
       { label: 'B', answer: 'Guava' },
       { label: 'C', answer: "Padton's magic scepter" },
       { label: 'D', answer: 'I love wine' },
+    ],
+  },
+  {
+    question: 'Who lives where?',
+    answers: [
+      { label: 'A', answer: ['Demi: Ground Floor', 'Poot: Basement'] },
+      { label: 'B', answer: ['Demi: Basement', 'Poot: Ground Floor'] },
+      { label: 'C', answer: ['Demi: Penthouse', 'Poot: Ground Floor'] },
+      { label: 'D', answer: ['Demi: Basement', 'Poot: Also Basement'] },
     ],
   },
   {
@@ -43,3 +58,10 @@ export const MINIGAME_QUESTIONS: Array<MinigameQuestion> = [
     ],
   },
 ];
+
+// $FlowFixMe
+const imagesContext = require.context('../images/celebration');
+
+export const MINIGAME_IMAGES: Array<string> = imagesContext
+  .keys()
+  .map((key) => imagesContext(key));

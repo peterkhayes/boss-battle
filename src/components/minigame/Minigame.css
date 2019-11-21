@@ -13,7 +13,7 @@
 }
 
 .question {
-    font-size: 32px;
+    font-size: 36px;
     text-align: center;
     margin: 0 48px 48px;
 }
@@ -21,6 +21,7 @@
 .answers {
   width: 100%;
   display: flex;
+  font-size: 28px;
   flex-wrap: wrap;
   justify-content: space-around;
 }
@@ -38,9 +39,14 @@
 .answerText {
   min-height: 120px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 24px;
   padding: 16px;
   text-align: center;
+}
+
+.celebrationImage {
+  transform: translateX(-50%) translateY(-50%);
 }

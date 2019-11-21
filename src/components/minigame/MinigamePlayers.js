@@ -29,8 +29,8 @@ export default function MinigamePlayersPage({
 
   const [player1Name, player2Name] = (() => {
     if (!player1Ready) return [randomName, '???'];
-    if (!player2Ready) return ['Beryl', randomName];
-    return ['Beryl', 'Peter'];
+    if (!player2Ready) return ['Beryl B. Beryl', randomName];
+    return ['Beryl B. Beryl', 'Peter'];
   })();
 
   return (

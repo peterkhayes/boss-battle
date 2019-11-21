@@ -46,7 +46,11 @@ function Answer({ label, selected, children }: AnswerProps) {
       dark
       title={label}
     >
-      <div className={styles.answerText}>{children}</div>
+      <div className={styles.answerText}>
+        {Array.isArray(children)
+          ? children.map((child, i) => <div key={i}>{child}</div>)
+          : children}
+      </div>
     </Container>
   );
 }

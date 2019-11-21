@@ -7,11 +7,12 @@ type Props = {
   className?: string,
   width?: number,
   height?: number,
+  style?: Object,
 };
 
-export default function Image({ src, glow, className, width, height }: Props) {
+export default function Image({ src, glow, className, width, height, style }: Props) {
   return (
-    <div className={className} style={{ width, height, position: 'relative' }}>
+    <div className={className} style={{ width, height, position: 'relative', ...style }}>
       {glow && (
         <div
           style={{

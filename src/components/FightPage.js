@@ -176,7 +176,7 @@ function AttackModal({ attack, player, boss, clearAttack }: AttackModalProps) {
   return (
     <Modal
       onOverlayClick={clearAttack}
-      classNames={classNames({
+      className={classNames({
         [styles.exclusionary]: attack.type === 'exclusionary',
         [styles.inclusive]: attack.type !== 'exclusionary',
       })}
@@ -213,8 +213,8 @@ function InclusiveVictoryModal({ player, boss }: { player: Fighter, boss: Fighte
 }
 
 function getProgressProps(vibes: number) {
-  if (vibes <= BAD_VIBES_MAX) return { error: true };
+  if (vibes <= BAD_VIBES_MAX) return { error: true, className: styles.vibeAnimation };
   if (vibes <= OK_VIBES_MAX) return { warning: true };
   if (vibes < GOOD_VIBES_MAX) return { success: true };
-  return { primary: true };
+  return { primary: true, className: styles.vibeAnimation };
 }

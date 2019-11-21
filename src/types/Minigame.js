@@ -2,7 +2,7 @@
 
 export type MinigameAnswer = {
   label: string,
-  answer: string,
+  answer: string | Array<string>,
 };
 
 export type MinigameQuestion = {
