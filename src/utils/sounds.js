@@ -10,9 +10,9 @@ for (const filename of soundsContext.keys()) {
   sounds[name] = soundsContext(filename);
 }
 
-export function soundsMatching(substr: string): Array<string> {
+export function soundsMatching(match: RegExp | string): Array<string> {
   return Object.keys(sounds)
-    .filter((key) => key.includes(substr))
+    .filter((key) => (typeof match === 'string' ? key.includes(match) : match.test(key)))
     .map((key) => sounds[key]);
 }
 

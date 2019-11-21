@@ -18,7 +18,7 @@ import teslaImage from '../images/tesla.png';
 import turntablesImage from '../images/turntables.png';
 import youtubeImage from '../images/youtube.png';
 import minimalismImage from '../images/minimalism.png';
-import selfieStickImage from '../images/selfie_stick.png';
+import pitchDeckImage from '../images/pitch_deck.png';
 
 const EMAIL = {
   name: 'Email',
@@ -291,7 +291,7 @@ const TESLA = {
 export const CONRAD: Fighter = {
   vibes: GOOD_VIBES_MIN,
   name: 'Conrad',
-  title: 'Visionary CEO',
+  title: 'CEO & Thought Leader',
   image: conradImage,
   sounds: getFighterSounds('Conrad'),
   weapon: TESLA,
@@ -561,7 +561,7 @@ export const LUCAS: Fighter = {
 
 const PITCH_DECK = {
   name: 'Pitch Deck',
-  image: selfieStickImage,
+  image: pitchDeckImage,
   attacks: [
     {
       type: 'exclusionary',

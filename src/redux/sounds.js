@@ -27,15 +27,15 @@ const soundsMiddleware: ReduxMiddleware = (store) => (next) => (action) => {
     action.type === 'select_weapon' ||
     action.type === 'select_boss'
   ) {
-    playSound(sounds.punch, 0.4);
+    playSound(sounds.punch, 0.8);
   }
 
   if (action.type === 'change_weapon' || action.type === 'change_boss') {
-    playSound(sounds.swoosh, 0.4);
+    playSound(sounds.swoosh, 0.8);
   }
 
   if (previousState.attack == null && currentState.attack != null) {
-    playSound(sounds.punch, 0.4);
+    playSound(sounds.punch, 0.8);
   }
 
   if (previousState.stage === 'fight' && currentState.stage === 'fight') {

@@ -31,7 +31,8 @@ export default function useMusic(state: ReduxState, isGatekeeper: boolean) {
     if (!track) return;
 
     trackRef.current = track;
-    const audio = playSound(track);
+    console.log('playing', track);
+    const audio = playSound(track, 0.5);
 
     const listener = () => playNext(tracks);
     audio.addEventListener('ended', listener);
