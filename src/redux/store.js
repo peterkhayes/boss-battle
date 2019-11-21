@@ -12,15 +12,21 @@ import {
 import logger from 'redux-logger';
 import { type ReduxAction, reducer } from './actions';
 import { type ReduxState } from './state';
-import syncMiddleware from './sync';
+import minigameMiddleware from './minigame';
 import soundsMiddleware from './sounds';
+import syncMiddleware from './sync';
 
 export type ReduxDispatch = <T: ReduxAction>(T) => T;
 export type ReduxStore = StoreGeneric<ReduxState, ReduxAction, ReduxDispatch>;
 export type ReduxMiddleware = MiddlewareGeneric<ReduxState, ReduxAction, ReduxDispatch>;
 
 export function createStore(): ReduxStore {
-  const middleware = applyMiddleware(logger, soundsMiddleware, syncMiddleware);
+  const middleware = applyMiddleware(
+    logger,
+    minigameMiddleware,
+    soundsMiddleware,
+    syncMiddleware,
+  );
   return createStoreGeneric(reducer, middleware);
 }
 

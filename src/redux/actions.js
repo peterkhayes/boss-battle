@@ -7,6 +7,7 @@ import sample from 'lodash/sample';
 import { changeVibes, getRandomAttacks } from '../utils/fighting';
 import { PLAYER_IMAGES, PLAYER_SOUND_BANKS } from '../config/playerDefaults';
 import { GOOD_VIBES_MIN } from '../config/vibes';
+import { MINIGAME_QUESTIONS } from '../config/minigame';
 
 /*
   Resets the game and move to the initial state
@@ -138,9 +139,19 @@ export function boostBossVibes(): ChangeBossVibesAction {
 /*
   Sync the state when another client sets it
 */
+
 type SyncStateAction = { type: 'sync_state', payload: ReduxState };
 export function syncState(state: ReduxState): SyncStateAction {
   return { type: 'sync_state', payload: state };
+}
+
+/*
+  Show or make progress in the minigame
+*/
+
+type AdvanceMinigameAction = { type: 'advance_minigame' };
+export function advanceMinigame(): AdvanceMinigameAction {
+  return { type: 'advance_minigame' };
 }
 
 /*
@@ -163,7 +174,8 @@ export type ReduxAction =
   | ClearAttackAction
   | ChangePlayerVibesAction
   | ChangeBossVibesAction
-  | SyncStateAction;
+  | SyncStateAction
+  | AdvanceMinigameAction;
 
 /*
   Handle actions in the reducer
@@ -329,6 +341,47 @@ export function reducer(
 
     case 'sync_state': {
       return action.payload;
+    }
+
+    case 'advance_minigame': {
+      if (!state.stage.startsWith('minigame')) {
+        return { stage: 'minigame_intro' };
+      } else if (state.stage === 'minigame_intro') {
+        return {
+          stage: 'minigame_players',
+          player1Ready: false,
+          player2Ready: false,
+        };
+      } else if (state.stage === 'minigame_players' && !state.player1Ready) {
+        return {
+          stage: 'minigame_players',
+          player1Ready: true,
+          player2Ready: false,
+        };
+      } else if (state.stage === 'minigame_players' && !state.player2Ready) {
+        return {
+          stage: 'minigame_players',
+          player1Ready: true,
+          player2Ready: true,
+        };
+      } else if (state.stage === 'minigame_players') {
+        return {
+          stage: 'minigame_questions',
+          index: 0,
+          answered: false,
+        };
+      } else if (
+        state.stage === 'minigame_questions' &&
+        state.index < MINIGAME_QUESTIONS.length - 1
+      ) {
+        return {
+          stage: 'minigame_questions',
+          index: state.answered ? state.index + 1 : state.index,
+          answered: !state.answered,
+        };
+      } else {
+        return { stage: 'minigame_celebration' };
+      }
     }
 
     default:

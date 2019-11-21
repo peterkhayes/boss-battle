@@ -1,0 +1,46 @@
+.titleHeader {
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.titleText {
+  font-size: 48px;
+  animation-name: marqueeColor;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.question {
+    font-size: 32px;
+    text-align: center;
+    margin: 0 48px 48px;
+}
+
+.answers {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.answer {
+  width: 45%;
+  margin-top: 16px;
+}
+
+.answer.selected {
+  background-color: rgba(255,255,0, 0.2);
+  border-radius: 5px;
+}
+  
+.answerText {
+  min-height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  padding: 16px;
+  text-align: center;
+}

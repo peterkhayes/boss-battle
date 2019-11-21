@@ -7,8 +7,9 @@ import InitialPage from './InitialPage';
 import ChooseNamePage from './ChooseNamePage';
 import ChooseWeaponPage from './ChooseWeaponPage';
 import ChooseBossPage from './ChooseBossPage';
-import FightPage from './FightPage';
 import ErrorPage from './ErrorPage';
+import FightPage from './FightPage';
+import Minigame from './minigame/Minigame';
 import useMusic from './useMusic';
 
 function App() {
@@ -30,6 +31,14 @@ function App() {
             return <ChooseBossPage {...state} />;
           case 'fight':
             return <FightPage {...state} />;
+          case 'minigame_intro':
+            return <Minigame stage="minigame_intro" {...state} />;
+          case 'minigame_players':
+            return <Minigame stage="minigame_players" {...state} />;
+          case 'minigame_questions':
+            return <Minigame stage="minigame_questions" {...state} />;
+          case 'minigame_celebration':
+            return <Minigame stage="minigame_celebration" {...state} />;
           default: {
             (state.stage: empty);
             return <ErrorPage />;

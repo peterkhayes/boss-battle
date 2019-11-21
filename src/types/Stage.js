@@ -33,9 +33,33 @@ export type FightStage = {
   lastPlayerAttackType: AttackType,
 };
 
+export type MinigameIntro = {
+  stage: 'minigame_intro',
+};
+
+export type MinigamePlayers = {
+  stage: 'minigame_players',
+  player1Ready: boolean,
+  player2Ready: boolean,
+};
+
+export type MinigameQuestions = {
+  stage: 'minigame_questions',
+  index: number,
+  answered: boolean,
+};
+
+export type MinigameCelebration = {
+  stage: 'minigame_celebration',
+};
+
 export type Stage =
   | InitialStage
   | ChooseNameStage
   | ChooseWeaponStage
   | ChooseBossStage
-  | FightStage;
+  | FightStage
+  | MinigameIntro
+  | MinigamePlayers
+  | MinigameQuestions
+  | MinigameCelebration;
