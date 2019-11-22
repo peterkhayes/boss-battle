@@ -3,3 +3,11 @@
     text-align: center;
     margin: 48px;
 }
+
+.title.large {
+    font-size: 64px;
+}
+
+.title.giant {
+    font-size: 96px;
+}

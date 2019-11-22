@@ -11,6 +11,14 @@
     color: white; */
 }
 
-.vertical {
+.root.vertical {
     flex-direction: column;
+}
+
+.root.gatekeeper {
+    transform: scale(0.6);
+    top: -180px;
+    left: -320px;
+    right: -320px;
+    bottom: -180px;
 }

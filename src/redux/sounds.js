@@ -31,7 +31,7 @@ const soundsMiddleware: ReduxMiddleware = (store) => (next) => (action) => {
   }
 
   if (action.type === 'change_weapon' || action.type === 'change_boss') {
-    playSound(sounds.swoosh, 0.8);
+    playSound(sounds.swoosh, 0.7);
   }
 
   if (previousState.attack == null && currentState.attack != null) {

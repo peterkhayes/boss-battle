@@ -11,7 +11,7 @@
 
 .vibesText {
     margin-top: 40px;
-    font-size: 28px;
+    font-size: 24px;
     color: white;
 }
 
@@ -49,12 +49,14 @@
 }
 
 .fighterName {
-    font-size: 36px;
+    font-size: 48px;
 }
 
 .fighterTitle {
+    opacity: 0.5;
+
     margin-top: 8px;
-    font-size: 22px;
+    font-size: 26px;
 }
 
 .fighterImage {
@@ -63,12 +65,12 @@
 }
 
 .weaponRow {
-    margin-bottom: 24px;
+    /* margin-bottom: 12px; */
 }
 
 .weaponHeader {
     opacity: 0.7;
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 8px;
 }
 
@@ -79,13 +81,12 @@
 .weaponInfo {
     display: flex;
     align-items: center;
-    font-size: 22px;
+    font-size: 26px;
 }
 
 .flipped .weaponInfo {
     flex-direction: row-reverse;
     text-align: right;
-
 }
 
 .weaponName {
@@ -98,14 +99,18 @@
 }
 
 .weaponImage {
-    width: 28px;
-    height: 28px;
+    width: 102px;
+    height: 56px;
+}
+
+.flipped .weaponImage {
+    width: 72px;
 }
 
 .attackItem {
     margin-top: 32px;
-    font-size: 24px;
-    padding: 32px 16px;
+    font-size: 32px;
+    padding: 32px 0;
 }
 .exclusionary, .exclusionary * {
     color: #f88 !important;
@@ -146,7 +151,7 @@
     padding: 50px;
 }
 
-.attackDescription { 
+.attackDescription {
     color: white !important; /* Sorry... */
     font-size: 24px;
     font-family: Arial, Helvetica, sans-serif;
@@ -158,17 +163,17 @@
 
 .factHeader {
     color: gold;
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 8px;
     text-transform: uppercase;
 }
 
 .factDescription {
-    font-size: 22px;
+    font-size: 32px;
 }
 
 .modalFighterName {
-    font-size: 28px;
+    font-size: 32px;
     margin-bottom: 16px;
 }
 

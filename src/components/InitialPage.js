@@ -19,7 +19,7 @@ export default function InitialPage(_props: InitialStage) {
   return (
     <PageContainer>
       <AnimatedText colors={colors.PALETTE_1}>
-        <Title>Boss Battle</Title>
+        <Title size="giant">Boss Battle</Title>
       </AnimatedText>
     </PageContainer>
   );

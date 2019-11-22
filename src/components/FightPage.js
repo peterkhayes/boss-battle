@@ -135,7 +135,7 @@ function FighterSection({ children, imageWidth, fighter, flipped }: FighterSecti
       </div>
 
       <div className={styles.weaponRow}>
-        <div className={styles.weaponHeader}>WEAPON</div>
+        {/* <div className={styles.weaponHeader}>WEAPON</div> */}
         <div className={styles.weaponInfo}>
           <Image className={styles.weaponImage} src={fighter.weapon.image} />
           <div className={styles.weaponName}>{fighter.weapon.name}</div>
@@ -183,7 +183,7 @@ function AttackModal({ attack, player, boss, clearAttack }: AttackModalProps) {
     >
       {/* TODO: fun animation here */}
       <div className={styles.modalFighterName}>{fighter.name} uses...</div>
-      <Title>{attack.name}</Title>
+      <Title size="large">{attack.name}</Title>
       {isGatekeeper && <div className={styles.attackDescription}>{description}</div>}
     </Modal>
   );
@@ -194,7 +194,7 @@ function ExclusionaryVictoryModal({ fighter }: { fighter: Fighter }) {
     <Modal>
       <Image width={200} height={200} glow src={fighter.image} />
       <AnimatedText colors={['#f88', '#ddd']} colorTransitionTime={200}>
-        <Title>{fighter.name} Wins!</Title>
+        <Title size="large">{fighter.name} Wins!</Title>
       </AnimatedText>
     </Modal>
   );
@@ -205,7 +205,7 @@ function InclusiveVictoryModal({ player, boss }: { player: Fighter, boss: Fighte
     <Modal>
       <Image width={200} height={200} glow src={player.image} />
       <AnimatedText colors={['#88f', '#ddd']} colorTransitionTime={200}>
-        <Title>Mutual Victory!</Title>
+        <Title size="large">Mutual Victory!</Title>
       </AnimatedText>
       <Image width={200} height={200} glow src={boss.image} />
     </Modal>

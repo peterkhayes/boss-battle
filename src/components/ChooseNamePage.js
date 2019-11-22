@@ -18,8 +18,8 @@ export default function ChooseNamePage({ name }: ChooseNameStage) {
 
   return (
     <PageContainer>
-      <Title>Enter Your Name</Title>
-      <div style={{ textAlign: 'center', fontSize: 24 }}>
+      <Title size="large">Enter Your Name</Title>
+      <div style={{ textAlign: 'center', fontSize: 48 }}>
         <TextInput
           autoFocus
           value={name}

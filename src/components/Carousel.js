@@ -41,7 +41,7 @@ export default function Carousel<T>({
 
   return (
     <PageContainer>
-      <Title>{title}</Title>
+      <Title size="large">{title}</Title>
       <div className={styles.track}>
         {options.map((option, index) => {
           let offset = index - selectedIndex;
